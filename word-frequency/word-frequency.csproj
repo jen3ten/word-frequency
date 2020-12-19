@@ -6,4 +6,8 @@
     <RootNamespace>word_frequency</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
