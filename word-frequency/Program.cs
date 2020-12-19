@@ -7,9 +7,11 @@ namespace word_frequency
     {
         static void Main(string[] args)
         {
+            string filePath = "C:/Users/jenev/source/repos/CleFedReserveBank";
+
             try
             {
-                using (StreamReader reader = new StreamReader("C:/Users/jenev/source/repos/CleFedReserveBank/word-frequency/word-frequency/Data/stopwords.txt"))
+                using (StreamReader reader = new StreamReader(filePath + "/word-frequency/word-frequency/Data/stopwords.txt"))
                 {
                     bool eof = false;
                     string line;
@@ -27,7 +29,6 @@ namespace word_frequency
                             count++;
                         }
                     }
-                    Console.WriteLine($"line count is {count}");
                 }
             }
             catch(Exception e)
