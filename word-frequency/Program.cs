@@ -13,21 +13,10 @@ namespace word_frequency
             {
                 using (StreamReader reader = new StreamReader(filePath + "/word-frequency/word-frequency/Data/stopwords.txt"))
                 {
-                    bool eof = false;
                     string line;
-                    int count = 0;
-                    while (!eof)
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        line = reader.ReadLine();
-                        if (line == null)
-                        {
-                            eof = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine(line);
-                            count++;
-                        }
+                        Console.WriteLine(line);
                     }
                 }
             }
