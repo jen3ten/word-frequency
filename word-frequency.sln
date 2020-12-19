@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-frequency", "word-frequency\word-frequency.csproj", "{A7F81694-BC6A-4ED2-AA2A-1B378FEE1E75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-frequency.Tests", "word-frequency.Tests\word-frequency.Tests.csproj", "{37FCE6FB-35E3-48EC-93BF-2D855DEA813B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7F81694-BC6A-4ED2-AA2A-1B378FEE1E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F81694-BC6A-4ED2-AA2A-1B378FEE1E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F81694-BC6A-4ED2-AA2A-1B378FEE1E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F81694-BC6A-4ED2-AA2A-1B378FEE1E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37FCE6FB-35E3-48EC-93BF-2D855DEA813B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FCE6FB-35E3-48EC-93BF-2D855DEA813B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FCE6FB-35E3-48EC-93BF-2D855DEA813B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FCE6FB-35E3-48EC-93BF-2D855DEA813B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F86B130F-CA70-4697-A52E-E5C7BA10C03C}
+	EndGlobalSection
+EndGlobal
