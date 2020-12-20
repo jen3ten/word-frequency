@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace word_frequency
@@ -15,8 +16,11 @@ namespace word_frequency
 
             DataReader reader = new DataReader(filePath);
 
-            string stopWords = reader.ConvertTextFileToString(stopWordsDataFile);
-            Console.WriteLine(stopWords);
+            List<string> stopWords = reader.ConvertTextFileToList(stopWordsDataFile);
+            foreach(string word in stopWords)
+            {
+                Console.WriteLine(word);
+            }
             Console.WriteLine();
 
             string text1Data = reader.ConvertTextFileToString(text1DataFile);
