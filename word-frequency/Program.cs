@@ -14,11 +14,15 @@ namespace word_frequency
             string text1DataFile = "Text1.txt";
             string text2DataFile = "Text2.txt";
 
+            List<string> stopWords;
+            string text1Data;
+            string text2Data;
+
             DataReader reader = new DataReader(filePath);
 
             if (reader.DefineStream(stopWordsDataFile))
             {
-                List<string> stopWords = reader.ConvertTextFileToList(reader.Stream);
+                stopWords = reader.ConvertTextFileToList(reader.Stream);
                 foreach (string word in stopWords)
                 {
                     Console.WriteLine(word);
@@ -28,14 +32,14 @@ namespace word_frequency
 
             if (reader.DefineStream(text1DataFile))
             {
-                string text1Data = reader.ConvertTextFileToString(reader.Stream);
+                text1Data = reader.ConvertTextFileToString(reader.Stream);
                 Console.WriteLine(text1Data);
             }
             Console.WriteLine();
 
             if (reader.DefineStream(text2DataFile))
             {
-                string text2Data = reader.ConvertTextFileToString(reader.Stream);
+                text2Data = reader.ConvertTextFileToString(reader.Stream);
                 Console.WriteLine(text2Data);
             }
             Console.WriteLine();
