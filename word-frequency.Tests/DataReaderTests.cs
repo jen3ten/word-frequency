@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Authentication;
 using Xunit;
 
@@ -31,6 +32,15 @@ namespace word_frequency.Tests
 
             Assert.IsType<string>(sut.ConvertTextFileToString(sut.Stream));
         }
+
+        [Fact]
+        public void ConvertTextFileToList_Should_Return_List_Type()
+        {
+            sut.DefineStream("TestFile1.txt");
+
+            Assert.IsType<List<string>>(sut.ConvertTextFileToList(sut.Stream));
+        }
+
 
     }
 }

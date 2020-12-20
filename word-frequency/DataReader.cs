@@ -44,16 +44,16 @@ namespace word_frequency
             }
         }
 
-        public List<string> ConvertTextFileToList(string fileName)
+        public List<string> ConvertTextFileToList(StreamReader stream)
         {
             List<string> textList = new List<string>();
 
             try
             {
-                using (StreamReader reader = new StreamReader(FilePath + fileName))
+                using (stream)
                 {
                     string line;
-                    while ((line = reader.ReadLine()) != null)
+                    while ((line = stream.ReadLine()) != null)
                     {
                         textList.Add(line);
                     }
