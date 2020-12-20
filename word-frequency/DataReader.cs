@@ -14,8 +14,10 @@ namespace word_frequency
 
         public string FilePath { get; set; }
 
-        public void ConvertTextFileToString(string fileName)
+        public string ConvertTextFileToString(string fileName)
         {
+            string textString = "";
+
             try
             {
                 using (StreamReader reader = new StreamReader(FilePath + fileName))
@@ -23,7 +25,7 @@ namespace word_frequency
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        Console.WriteLine(line);
+                        textString += line + " ";
                     }
                 }
             }
@@ -33,6 +35,7 @@ namespace word_frequency
                 Console.WriteLine(e.Message);
             }
 
+            return textString;
         }
     }
 }

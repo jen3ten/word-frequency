@@ -15,7 +15,17 @@ namespace word_frequency
 
             DataReader reader = new DataReader(filePath);
 
-            reader.ConvertTextFileToString(stopWordsDataFile);
+            string stopWords = reader.ConvertTextFileToString(stopWordsDataFile);
+            Console.WriteLine(stopWords);
+            Console.WriteLine();
+
+            string text1Data = reader.ConvertTextFileToString(text1DataFile);
+            Console.WriteLine(text1Data);
+            Console.WriteLine();
+
+            string text2Data = reader.ConvertTextFileToString(text2DataFile);
+            Console.WriteLine(text2Data);
+            Console.WriteLine();
 
         }
     }
