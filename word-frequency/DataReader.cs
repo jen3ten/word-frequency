@@ -14,11 +14,11 @@ namespace word_frequency
 
         public string FilePath { get; set; }
 
-        public void ReadFromDataFile()
+        public void ConvertTextFileToString(string fileName)
         {
             try
             {
-                using (StreamReader reader = new StreamReader(FilePath + "/word-frequency/word-frequency/Data/stopwords.txt"))
+                using (StreamReader reader = new StreamReader(FilePath + fileName))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
