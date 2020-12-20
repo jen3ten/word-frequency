@@ -7,11 +7,15 @@ namespace word_frequency
     {
         static void Main(string[] args)
         {
-            string filePath = "C:/Users/jenev/source/repos/CleFedReserveBank";
+            string applicationLocation = "C:/Users/jenev/source/repos/CleFedReserveBank";
+            string filePath = applicationLocation + "/word-frequency/word-frequency/Data/";
+            string stopWordsDataFile = "stopwords.txt";
+            string text1DataFile = "Text1.txt";
+            string text2DataFile = "Text2.txt";
 
             DataReader reader = new DataReader(filePath);
 
-            reader.ReadFromDataFile();
+            reader.ConvertTextFileToString(stopWordsDataFile);
 
         }
     }
