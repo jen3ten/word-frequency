@@ -17,8 +17,10 @@ namespace word_frequency
 
         public bool DefineStream(string fileName)
         {
-
-            return false;
+            using (Stream = new StreamReader(FilePath + fileName))
+            {
+                return true;
+            }
         }
 
         public string ConvertTextFileToString(string fileName)
