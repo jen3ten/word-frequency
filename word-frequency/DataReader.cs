@@ -19,41 +19,29 @@ namespace word_frequency
         {
             try
             {
-                using (Stream = new StreamReader(FilePath + fileName))
-                {
-                    return true;
-                }
+                Stream = new StreamReader(FilePath + fileName);
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
             }
-
         }
 
-        public string ConvertTextFileToString(string fileName)
+        public string ConvertTextFileToString(StreamReader stream)
         {
             string textString = "";
-
-            try
+            using (stream)
             {
-                using (StreamReader reader = new StreamReader(FilePath + fileName))
+                string line;
+                while ((line = stream.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        textString += line + " ";
-                    }
+                    textString += line + " ";
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("ERROR: file could not be read");
-                Console.WriteLine(e.Message);
-            }
 
-            return textString;
+                return textString;
+            }
         }
 
         public List<string> ConvertTextFileToList(string fileName)
