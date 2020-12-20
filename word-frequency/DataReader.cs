@@ -17,10 +17,19 @@ namespace word_frequency
 
         public bool DefineStream(string fileName)
         {
-            using (Stream = new StreamReader(FilePath + fileName))
+            try
             {
-                return true;
+                using (Stream = new StreamReader(FilePath + fileName))
+                {
+                    return true;
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
         }
 
         public string ConvertTextFileToString(string fileName)

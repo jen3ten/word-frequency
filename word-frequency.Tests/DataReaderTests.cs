@@ -23,5 +23,11 @@ namespace word_frequency.Tests
         {
             Assert.True(sut.DefineStream("TestFile1.txt"));
         }
+
+        [Fact]
+        public void DefineStream_Should_Return_False_If_File_Cannot_Be_Read()
+        {
+            Assert.False(sut.DefineStream(""));
+        }
     }
 }
