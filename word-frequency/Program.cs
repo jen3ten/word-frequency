@@ -16,12 +16,15 @@ namespace word_frequency
 
             DataReader reader = new DataReader(filePath);
 
-            //List<string> stopWords = reader.ConvertTextFileToList(stopWordsDataFile);
-            //foreach (string word in stopWords)
-            //{
-            //    Console.WriteLine(word);
-            //}
-            //Console.WriteLine();
+            if (reader.DefineStream(stopWordsDataFile))
+            {
+                List<string> stopWords = reader.ConvertTextFileToList(reader.Stream);
+                foreach (string word in stopWords)
+                {
+                    Console.WriteLine(word);
+                }
+            }
+            Console.WriteLine();
 
             if (reader.DefineStream(text1DataFile))
             {
