@@ -17,7 +17,7 @@ namespace word_frequency
             DataReader reader = new DataReader(filePath);
 
             List<string> stopWords = reader.ConvertTextFileToList(stopWordsDataFile);
-            foreach(string word in stopWords)
+            foreach (string word in stopWords)
             {
                 Console.WriteLine(word);
             }
@@ -30,6 +30,10 @@ namespace word_frequency
             string text2Data = reader.ConvertTextFileToString(text2DataFile);
             Console.WriteLine(text2Data);
             Console.WriteLine();
+
+            bool textException = reader.DefineStream("");
+            Console.WriteLine(textException);
+            Console.ReadKey();
 
         }
     }

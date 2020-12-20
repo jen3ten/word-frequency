@@ -13,6 +13,13 @@ namespace word_frequency
         }
 
         public string FilePath { get; set; }
+        public StreamReader Stream { get; set; }
+
+        public bool DefineStream(string fileName)
+        {
+
+            return false;
+        }
 
         public string ConvertTextFileToString(string fileName)
         {
