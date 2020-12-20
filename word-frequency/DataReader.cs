@@ -47,26 +47,15 @@ namespace word_frequency
         public List<string> ConvertTextFileToList(StreamReader stream)
         {
             List<string> textList = new List<string>();
-
-            try
+            using (stream)
             {
-                using (stream)
+                string line;
+                while ((line = stream.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = stream.ReadLine()) != null)
-                    {
-                        textList.Add(line);
-                    }
+                    textList.Add(line);
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("ERROR: file could not be read");
-                Console.WriteLine(e.Message);
-            }
-
             return textList;
         }
-
     }
 }
