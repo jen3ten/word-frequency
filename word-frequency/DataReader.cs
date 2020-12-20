@@ -13,26 +13,49 @@ namespace word_frequency
         }
 
         public string FilePath { get; set; }
+        public StreamReader Stream { get; set; }
 
-        public void ReadFromDataFile()
+        public bool DefineStream(string fileName)
         {
             try
             {
-                using (StreamReader reader = new StreamReader(FilePath + "/word-frequency/word-frequency/Data/stopwords.txt"))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        Console.WriteLine(line);
-                    }
-                }
+                Stream = new StreamReader(FilePath + fileName);
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("ERROR: file could not be read");
                 Console.WriteLine(e.Message);
+                return false;
             }
+        }
 
+        public string ConvertTextFileToString(StreamReader stream)
+        {
+            string textString = "";
+            using (stream)
+            {
+                string line;
+                while ((line = stream.ReadLine()) != null)
+                {
+                    textString += line + " ";
+                }
+
+                return textString;
+            }
+        }
+
+        public List<string> ConvertTextFileToList(StreamReader stream)
+        {
+            List<string> textList = new List<string>();
+            using (stream)
+            {
+                string line;
+                while ((line = stream.ReadLine()) != null)
+                {
+                    textList.Add(line);
+                }
+            }
+            return textList;
         }
     }
 }
