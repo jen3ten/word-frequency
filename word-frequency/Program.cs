@@ -23,18 +23,21 @@ namespace word_frequency
             }
             Console.WriteLine();
 
-            //string text1Data = reader.ConvertTextFileToString(text1DataFile);
-            //Console.WriteLine(text1Data);
-            //Console.WriteLine();
+            if (reader.DefineStream(text1DataFile))
+            {
+                string text1Data = reader.ConvertTextFileToString(reader.Stream);
+                Console.WriteLine(text1Data);
+            }
+            Console.WriteLine();
 
-            //string text2Data = reader.ConvertTextFileToString(text2DataFile);
-            //Console.WriteLine(text2Data);
-            //Console.WriteLine();
+            if (reader.DefineStream(text2DataFile))
+            {
+                string text2Data = reader.ConvertTextFileToString(reader.Stream);
+                Console.WriteLine(text2Data);
+            }
+            Console.WriteLine();
 
-            bool textException = reader.DefineStream("");
-            Console.WriteLine(textException);
             Console.ReadKey();
-
         }
     }
 }
