@@ -12,7 +12,7 @@ namespace word_frequency
             return dataString.Trim();
         }
 
-        public string ListItemsToLowerCase(string dataString)
+        public string StringToLowerCase(string dataString)
         {
             return dataString.ToLower();
         }

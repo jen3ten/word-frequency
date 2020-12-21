@@ -25,11 +25,11 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void ListItemsToLowerCase_Should_Remove_All_Upper_Case_Letters()
+        public void StringToLowerCase_Should_Remove_All_Upper_Case_Letters()
         {
             expectedString = " one ";
 
-            Assert.Equal(expectedString, sut.ListItemsToLowerCase(testString));
+            Assert.Equal(expectedString, sut.StringToLowerCase(testString));
 
         }
 

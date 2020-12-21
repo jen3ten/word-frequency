@@ -24,10 +24,12 @@ namespace word_frequency
             if (reader.DefineStream(stopWordsDataFile))
             {
                 stopWords = reader.ConvertTextFileToList(reader.Stream);
-                // stopWords = cleaner.TrimString(stopWords);
-                foreach (string word in stopWords)
+
+                for (int i = 0; i < stopWords.Count; i++)
                 {
-                    Console.WriteLine(word);
+                    stopWords[i] = cleaner.TrimString(stopWords[i]);
+                    stopWords[i] = cleaner.StringToLowerCase(stopWords[i]);
+                    Console.WriteLine(stopWords[i]);
                 }
             }
             Console.WriteLine();
