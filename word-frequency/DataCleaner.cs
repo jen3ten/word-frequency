@@ -18,7 +18,11 @@ namespace word_frequency
 
         public List<string> ListItemsToLowerCase(List<string> list)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = list[i].ToLower();
+            }
+            return list;
         }
     }
 }
