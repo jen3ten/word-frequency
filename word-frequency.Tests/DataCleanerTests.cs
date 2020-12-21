@@ -19,7 +19,7 @@ namespace word_frequency.Tests
         [Fact]
         public void TrimString_Should_Remove_Leading_And_Trailing_Spaces()
         {
-            expectedString = " One ";
+            expectedString = "One";
 
             Assert.Equal(expectedString, sut.TrimString(testString));
         }
@@ -27,7 +27,7 @@ namespace word_frequency.Tests
         [Fact]
         public void ListItemsToLowerCase_Should_Remove_All_Upper_Case_Letters()
         {
-            expectedString = " One ";
+            expectedString = " one ";
 
             Assert.Equal(expectedString, sut.ListItemsToLowerCase(testString));
 
