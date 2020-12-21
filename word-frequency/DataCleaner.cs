@@ -9,7 +9,11 @@ namespace word_frequency
 
         public List<string> TrimListStrings(List<string> list)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = list[i].Trim();
+            }
+            return list;
         }
     }
 }
