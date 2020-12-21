@@ -15,5 +15,10 @@ namespace word_frequency
             }
             return list;
         }
+
+        public List<string> ListItemsToLowerCase(List<string> list)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
