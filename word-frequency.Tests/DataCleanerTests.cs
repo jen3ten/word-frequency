@@ -8,27 +8,28 @@ namespace word_frequency.Tests
     public class DataCleanerTests
     {
         private DataCleaner sut;
-        private List<string> testList; 
+        private string testString;
+        private string expectedString;
         public DataCleanerTests()
         {
             sut = new DataCleaner();
-            testList = new List<string> { "  One", " tWo ", "THREE  ", "four" };
+            testString = " One ";
         }
 
         [Fact]
-        public void TrimListStrings_Should_Remove_Leading_And_Trailing_Spaces()
+        public void TrimString_Should_Remove_Leading_And_Trailing_Spaces()
         {
-            List<string> expectedList = new List<string> { "One", "tWo", "THREE", "four" };
+            expectedString = " One ";
 
-            Assert.Equal(expectedList, sut.TrimListStrings(testList));
+            Assert.Equal(expectedString, sut.TrimString(testString));
         }
 
         [Fact]
         public void ListItemsToLowerCase_Should_Remove_All_Upper_Case_Letters()
         {
-            List<string> expectedList = new List<string> { "  one", " two ", "three  ", "four" };
+            expectedString = " One ";
 
-            Assert.Equal(expectedList, sut.ListItemsToLowerCase(testList));
+            Assert.Equal(expectedString, sut.ListItemsToLowerCase(testString));
 
         }
 

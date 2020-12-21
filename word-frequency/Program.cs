@@ -24,7 +24,7 @@ namespace word_frequency
             if (reader.DefineStream(stopWordsDataFile))
             {
                 stopWords = reader.ConvertTextFileToList(reader.Stream);
-                stopWords = cleaner.TrimListStrings(stopWords);
+                // stopWords = cleaner.TrimString(stopWords);
                 foreach (string word in stopWords)
                 {
                     Console.WriteLine(word);

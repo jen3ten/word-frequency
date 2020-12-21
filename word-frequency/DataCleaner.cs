@@ -7,22 +7,14 @@ namespace word_frequency
     public class DataCleaner
     {
 
-        public List<string> TrimListStrings(List<string> list)
+        public string TrimString(string dataString)
         {
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i] = list[i].Trim();
-            }
-            return list;
+            return dataString.Trim();
         }
 
-        public List<string> ListItemsToLowerCase(List<string> list)
+        public string ListItemsToLowerCase(string dataString)
         {
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i] = list[i].ToLower();
-            }
-            return list;
+            return dataString.ToLower();
         }
     }
 }
