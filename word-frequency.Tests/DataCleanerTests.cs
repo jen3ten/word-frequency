@@ -7,12 +7,10 @@ namespace word_frequency.Tests
 {
     public class DataCleanerTests
     {
-        private DataCleaner sut;
         private string testString;
         private string expectedString;
         public DataCleanerTests()
         {
-            sut = new DataCleaner();
             testString = " One ";
         }
 
@@ -21,7 +19,7 @@ namespace word_frequency.Tests
         {
             expectedString = "One";
 
-            Assert.Equal(expectedString, sut.TrimString(testString));
+            Assert.Equal(expectedString, DataCleaner.TrimString(testString));
         }
 
         [Fact]
@@ -29,7 +27,7 @@ namespace word_frequency.Tests
         {
             expectedString = " one ";
 
-            Assert.Equal(expectedString, sut.StringToLowerCase(testString));
+            Assert.Equal(expectedString, DataCleaner.StringToLowerCase(testString));
 
         }
 
