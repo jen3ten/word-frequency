@@ -19,13 +19,17 @@ namespace word_frequency
             string text2Data;
 
             DataReader reader = new DataReader(filePath);
+            DataCleaner cleaner = new DataCleaner();
 
             if (reader.DefineStream(stopWordsDataFile))
             {
                 stopWords = reader.ConvertTextFileToList(reader.Stream);
-                foreach (string word in stopWords)
+
+                for (int i = 0; i < stopWords.Count; i++)
                 {
-                    Console.WriteLine(word);
+                    stopWords[i] = cleaner.TrimString(stopWords[i]);
+                    stopWords[i] = cleaner.StringToLowerCase(stopWords[i]);
+                    Console.WriteLine(stopWords[i]);
                 }
             }
             Console.WriteLine();
