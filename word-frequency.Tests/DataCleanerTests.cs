@@ -40,7 +40,7 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void SplitStringAtDelimiters_Should_Split_At_WhiteSpace()
+        public void SplitStringAtDelimiters_Should_Split_And_Remove_WhiteSpace()
         {
             string[] expectedArray = { "One", "two", "Three"};
             Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString2));

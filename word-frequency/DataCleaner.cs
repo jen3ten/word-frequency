@@ -19,7 +19,7 @@ namespace word_frequency
 
         public static string[] SplitStringAtDelimiters(string dataString)
         {
-            string[] dataArray = { };
+            string[] dataArray = dataString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             return dataArray;
         }
     }
