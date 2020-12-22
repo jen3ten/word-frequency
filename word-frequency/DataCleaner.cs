@@ -19,7 +19,8 @@ namespace word_frequency
 
         public static string[] SplitStringAtDelimiters()
         {
-            throw new NotImplementedException();
+            string[] dataArray = { };
+            return dataArray;
         }
     }
 }
