@@ -22,5 +22,10 @@ namespace word_frequency
             string[] dataArray = dataString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             return dataArray;
         }
+
+        public static string TrimCharactersFromString(string dataString)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
