@@ -37,7 +37,7 @@ namespace word_frequency
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
                 char[] delimiters = { ' ', '-' };
-                string[] text1Words = text1Data.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, delimiters);
                 for (int i = 0; i < text1Words.Length; i++)
                 {
                     Console.WriteLine(text1Words[i]);
@@ -49,7 +49,7 @@ namespace word_frequency
             {
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
                 char[] delimiters = { ' ', '-'};
-                string[] text2Words = text2Data.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, delimiters);
                 for (int i = 0; i < text2Words.Length; i++)
                 {
                     Console.WriteLine(text2Words[i]);
