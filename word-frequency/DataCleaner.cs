@@ -23,9 +23,9 @@ namespace word_frequency
             return dataArray;
         }
 
-        public static string TrimCharactersFromString(string dataString)
+        public static string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
-            throw new NotImplementedException();
+            return dataString.Trim(trimmedCharacters);
         }
     }
 }

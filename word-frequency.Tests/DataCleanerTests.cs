@@ -56,12 +56,13 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void TrimCharactersFromString_Should_Remove_NonAlphabetic_Chars_From_Lead_and_Trail_Of_String()
+        public void TrimCharactersFromString_Should_Remove_Question_Mark_From_Lead_and_Trail_Of_String()
         {
-            string testString = "3$hello?";
+            string testString = "hello?";
+            char[] testCharacters = { '?'};
             expectedString = "hello";
 
-            Assert.Equal(expectedString, DataCleaner.TrimCharactersFromString(testString));
+            Assert.Equal(expectedString, DataCleaner.TrimCharactersFromString(testString, testCharacters));
         }
     }
 }
