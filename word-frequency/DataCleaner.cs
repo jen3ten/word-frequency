@@ -4,17 +4,23 @@ using System.Text;
 
 namespace word_frequency
 {
-    public class DataCleaner
+    public static class DataCleaner
     {
 
-        public string TrimString(string dataString)
+        public static string TrimString(string dataString)
         {
             return dataString.Trim();
         }
 
-        public string StringToLowerCase(string dataString)
+        public static string StringToLowerCase(string dataString)
         {
             return dataString.ToLower();
+        }
+
+        public static string[] SplitStringAtDelimiters(string dataString, char[] delimiters)
+        {
+            string[] dataArray = dataString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            return dataArray;
         }
     }
 }

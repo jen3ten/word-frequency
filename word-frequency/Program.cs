@@ -19,7 +19,6 @@ namespace word_frequency
             string text2Data;
 
             DataReader reader = new DataReader(filePath);
-            DataCleaner cleaner = new DataCleaner();
 
             if (reader.DefineStream(stopWordsDataFile))
             {
@@ -27,8 +26,8 @@ namespace word_frequency
 
                 for (int i = 0; i < stopWords.Count; i++)
                 {
-                    stopWords[i] = cleaner.TrimString(stopWords[i]);
-                    stopWords[i] = cleaner.StringToLowerCase(stopWords[i]);
+                    stopWords[i] = DataCleaner.TrimString(stopWords[i]);
+                    stopWords[i] = DataCleaner.StringToLowerCase(stopWords[i]);
                     Console.WriteLine(stopWords[i]);
                 }
             }
@@ -37,14 +36,24 @@ namespace word_frequency
             if (reader.DefineStream(text1DataFile))
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
-                Console.WriteLine(text1Data);
+                char[] delimiters = { ' ', '-' };
+                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, delimiters);
+                for (int i = 0; i < text1Words.Length; i++)
+                {
+                    Console.WriteLine(text1Words[i]);
+                }
             }
             Console.WriteLine();
 
             if (reader.DefineStream(text2DataFile))
             {
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
-                Console.WriteLine(text2Data);
+                char[] delimiters = { ' ', '-'};
+                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, delimiters);
+                for (int i = 0; i < text2Words.Length; i++)
+                {
+                    Console.WriteLine(text2Words[i]);
+                }
             }
             Console.WriteLine();
 
