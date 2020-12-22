@@ -16,5 +16,10 @@ namespace word_frequency
         {
             return dataString.ToLower();
         }
+
+        public static string[] SplitStringAtDelimiters()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

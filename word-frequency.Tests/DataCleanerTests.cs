@@ -31,5 +31,11 @@ namespace word_frequency.Tests
 
         }
 
+        [Fact]
+        public void SplitStringAtDelimiters_Should_Create_String_Array()
+        {
+            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters());
+        }
+
     }
 }
