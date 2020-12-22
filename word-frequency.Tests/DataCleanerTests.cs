@@ -8,10 +8,12 @@ namespace word_frequency.Tests
     public class DataCleanerTests
     {
         private string testString;
+        private string testString2;
         private string expectedString;
         public DataCleanerTests()
         {
             testString = " One ";
+            testString2 = " One two  Three";
         }
 
         [Fact]
@@ -32,10 +34,18 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void SplitStringAtDelimiters_Should_Create_String_Array()
+        public void SplitStringAtDelimiters_Should_Return_String_Array()
         {
-            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters());
+            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters(""));
         }
+
+        [Fact]
+        public void SplitStringAtDelimiters_Should_Split_At_WhiteSpace()
+        {
+            string[] expectedArray = { "One", "two", "Three"};
+            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString2));
+        }
+
 
     }
 }

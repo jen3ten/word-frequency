@@ -17,7 +17,7 @@ namespace word_frequency
             return dataString.ToLower();
         }
 
-        public static string[] SplitStringAtDelimiters()
+        public static string[] SplitStringAtDelimiters(string dataString)
         {
             string[] dataArray = { };
             return dataArray;
