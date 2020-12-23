@@ -25,7 +25,7 @@ namespace word_frequency
 
         public static string RemoveStopWord(string dataString, string stopWord)
         {
-            int stopWordIndex = dataString.IndexOf(stopWord);
+            int stopWordIndex = dataString.IndexOf(stopWord, StringComparison.CurrentCultureIgnoreCase);
             if(stopWordIndex >= 0)
             {
                 dataString = dataString.Remove(stopWordIndex, stopWord.Length);
