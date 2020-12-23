@@ -6,6 +6,7 @@ namespace word_frequency
 {
     public static class DataCleaner
     {
+        public static char[] Delimiters { get; set; }
 
         public static string TrimString(string dataString)
         {

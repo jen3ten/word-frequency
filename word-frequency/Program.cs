@@ -18,7 +18,7 @@ namespace word_frequency
             List<string> stopWords;
             string text1Data;
             string text2Data;
-            char[] delimiters;
+            //char[] delimiters;
 
             DataReader reader = new DataReader(filePath);
 
@@ -37,38 +37,38 @@ namespace word_frequency
 
             if (reader.DefineStream(delimitersDataFile))
             {
-                delimiters = reader.ConvertTextFileToCharArray(reader.Stream);
+                DataCleaner.Delimiters = reader.ConvertTextFileToCharArray(reader.Stream);
 
-                for (int i = 0; i < delimiters.Length; i++)
+                for (int i = 0; i < DataCleaner.Delimiters.Length; i++)
                 {
-                    Console.WriteLine(delimiters[i]);
+                    Console.WriteLine(DataCleaner.Delimiters[i]);
                 }
             }
             Console.WriteLine();
 
-            //if (reader.DefineStream(text1DataFile))
-            //{
-            //    text1Data = reader.ConvertTextFileToString(reader.Stream);
-            //    //char[] delimiters = { ' ', '-' };
-            //    string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, delimiters);
-            //    for (int i = 0; i < text1Words.Length; i++)
-            //    {
-            //        Console.WriteLine(text1Words[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+            if (reader.DefineStream(text1DataFile))
+            {
+                text1Data = reader.ConvertTextFileToString(reader.Stream);
+                //char[] delimiters = { ' ', '-' };
+                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, DataCleaner.Delimiters);
+                for (int i = 0; i < text1Words.Length; i++)
+                {
+                    Console.WriteLine(text1Words[i]);
+                }
+            }
+            Console.WriteLine();
 
-            //if (reader.DefineStream(text2DataFile))
-            //{
-            //    text2Data = reader.ConvertTextFileToString(reader.Stream);
-            //    //char[] delimiters = { ' ', '-'};
-            //    string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, delimiters);
-            //    for (int i = 0; i < text2Words.Length; i++)
-            //    {
-            //        Console.WriteLine(text2Words[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+            if (reader.DefineStream(text2DataFile))
+            {
+                text2Data = reader.ConvertTextFileToString(reader.Stream);
+                //char[] delimiters = { ' ', '-'};
+                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, DataCleaner.Delimiters);
+                for (int i = 0; i < text2Words.Length; i++)
+                {
+                    Console.WriteLine(text2Words[i]);
+                }
+            }
+            Console.WriteLine();
 
             Console.ReadKey();
         }
