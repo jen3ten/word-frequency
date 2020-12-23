@@ -87,5 +87,14 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
         }
+
+        [Theory]
+        [InlineData("this is a stop word, but this one isn't.", "is")]
+        public void RemoveStopWord_Should_Not_Remove_Substring_From_Word(string testString, string stopWord)
+        {
+            expectedString = "this  a stop word, but this one isn't.";
+
+            Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
+        }
     }
 }
