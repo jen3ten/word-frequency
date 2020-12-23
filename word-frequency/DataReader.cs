@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace word_frequency
 {
@@ -57,5 +58,12 @@ namespace word_frequency
             }
             return textList;
         }
+
+        public string[] SplitStringOnRegExPattern(string input, string pattern)
+        {
+            string[] inputWords = Regex.Split(input, pattern);
+            return inputWords;
+        }
+
     }
 }
