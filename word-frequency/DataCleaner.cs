@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace word_frequency
 {
@@ -27,5 +28,12 @@ namespace word_frequency
         {
             return dataString.Trim(trimmedCharacters);
         }
+
+        public static string[] SplitStringOnRegExPattern(string input, string pattern)
+        {
+            string[] inputWords = Regex.Split(input, pattern);
+            return inputWords;
+        }
+
     }
 }

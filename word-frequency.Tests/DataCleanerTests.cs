@@ -64,5 +64,16 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedString, DataCleaner.TrimCharactersFromString(testString, testCharacters));
         }
+
+        [Theory]
+        [InlineData("My favorites: candy, cake, and pie!")]
+        public void SplitStringOnRegExPattern_Should_Return_Word_Array_Without_Punctuation(string testString)
+        {
+            string delimiterPattern = "([^a-zA-Z])";
+            string[] expectedArray = { "My", "favorites", "candy", "cake", "and", "pie" };
+
+            Assert.Equal(expectedArray, DataCleaner.SplitStringOnRegExPattern(testString, delimiterPattern));
+        }
+
     }
 }
