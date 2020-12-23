@@ -5,29 +5,30 @@ using System.Text;
 
 namespace word_frequency
 {
-    public static class DataCleaner
+    public class DataCleaner
     {
-        public static char[] Delimiters { get; set; }
+        public char[] Delimiters { get; set; }
 
-        public static string TrimString(string dataString)
+        public string TrimString(string dataString)
         {
             return dataString.Trim();
         }
 
-        public static string StringToLowerCase(string dataString)
+        public string StringToLowerCase(string dataString)
         {
             return dataString.ToLower();
         }
 
 
-        public static string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
+        public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
             return dataString.Trim(trimmedCharacters);
         }
 
-        public static void CreateDelimiterArrayFromTextFile(StreamReader stream)
+        public void CreateDelimiterArrayFromTextFile(StreamReader stream)
         {
             string textString = " "; //adds whitespace to char array
+
             using (stream)
             {
                 string line;
@@ -35,11 +36,11 @@ namespace word_frequency
                 {
                     textString += line;
                 }
-
-                StringReader sr = new StringReader(textString);
-
-                sr.Read(Delimiters);
             }
+
+            Delimiters = new char[textString.Length];
+            StringReader sr = new StringReader(textString);
+            sr.Read(Delimiters);
         }
 
         //public static string[] SplitStringAtDelimiters(string dataString, char[] delimiters)
@@ -48,7 +49,7 @@ namespace word_frequency
         //    return dataArray;
         //}
 
-        public static string[] SplitStringAtDelimiters(string dataString)
+        public string[] SplitStringAtDelimiters(string dataString)
         {
             string[] dataArray = dataString.Split(Delimiters, StringSplitOptions.RemoveEmptyEntries);
             return dataArray;

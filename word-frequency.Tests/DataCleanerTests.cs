@@ -9,9 +9,12 @@ namespace word_frequency.Tests
     {
         private string testString;
         private string expectedString;
+        private DataCleaner sut;
+
         public DataCleanerTests()
         {
             testString = " One ";
+            sut = new DataCleaner();
         }
 
         [Fact]
@@ -19,7 +22,7 @@ namespace word_frequency.Tests
         {
             expectedString = "One";
 
-            Assert.Equal(expectedString, DataCleaner.TrimString(testString));
+            Assert.Equal(expectedString, sut.TrimString(testString));
         }
 
         [Fact]
@@ -27,35 +30,35 @@ namespace word_frequency.Tests
         {
             expectedString = " one ";
 
-            Assert.Equal(expectedString, DataCleaner.StringToLowerCase(testString));
+            Assert.Equal(expectedString, sut.StringToLowerCase(testString));
         }
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Return_String_Array()
         {
-            DataCleaner.Delimiters = new char[] { };
+            sut.Delimiters = new char[] { };
 
-            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters(""));
+            Assert.IsType<string[]>(sut.SplitStringAtDelimiters(""));
         }
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_And_Remove_WhiteSpace()
         {
             string testString = " One two  Three";
-            DataCleaner.Delimiters = new char[] { ' ' };
+            sut.Delimiters = new char[] { ' ' };
             string[] expectedArray = { "One", "two", "Three"};
 
-            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString));
+            Assert.Equal(expectedArray, sut.SplitStringAtDelimiters(testString));
         }
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_At_Multiple_Delimiters()
         {
             string testString = " One--two  Three,four five six-seven";
-            DataCleaner.Delimiters = new char[] { ' ', '-', ',' };
+            sut.Delimiters = new char[] { ' ', '-', ',' };
             string[] expectedArray = { "One", "two", "Three", "four", "five", "six", "seven" };
 
-            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString));
+            Assert.Equal(expectedArray, sut.SplitStringAtDelimiters(testString));
         }
 
         [Fact]
@@ -65,7 +68,7 @@ namespace word_frequency.Tests
             char[] testCharacters = { '?'};
             expectedString = "hello";
 
-            Assert.Equal(expectedString, DataCleaner.TrimCharactersFromString(testString, testCharacters));
+            Assert.Equal(expectedString, sut.TrimCharactersFromString(testString, testCharacters));
         }
     }
 }
