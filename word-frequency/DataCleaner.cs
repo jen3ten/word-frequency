@@ -57,7 +57,11 @@ namespace word_frequency
 
         public bool ExistsInTermFrequency(string term)
         {
-            throw new NotImplementedException();
+            if(TermFrequency != null)
+            {
+                return TermFrequency.ContainsKey(term);
+            }
+            return false;
         }
     }
 }
