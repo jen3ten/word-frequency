@@ -46,27 +46,27 @@ namespace word_frequency
             }
             Console.WriteLine();
 
-            //if (reader.DefineStream(text1DataFile))
-            //{
-            //    text1Data = reader.ConvertTextFileToString(reader.Stream);
-            //    string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
-            //    for (int i = 0; i < text1Words.Length; i++)
-            //    {
-            //        Console.WriteLine(text1Words[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+            if (reader.DefineStream(text1DataFile))
+            {
+                text1Data = reader.ConvertTextFileToString(reader.Stream);
+                string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
+                for (int i = 0; i < text1Words.Length; i++)
+                {
+                    Console.WriteLine(text1Words[i]);
+                }
+            }
+            Console.WriteLine();
 
-            //if (reader.DefineStream(text2DataFile))
-            //{
-            //    text2Data = reader.ConvertTextFileToString(reader.Stream);
-            //    string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
-            //    for (int i = 0; i < text2Words.Length; i++)
-            //    {
-            //        Console.WriteLine(text2Words[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+            if (reader.DefineStream(text2DataFile))
+            {
+                text2Data = reader.ConvertTextFileToString(reader.Stream);
+                string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
+                for (int i = 0; i < text2Words.Length; i++)
+                {
+                    Console.WriteLine(text2Words[i]);
+                }
+            }
+            Console.WriteLine();
 
             Console.ReadKey();
         }

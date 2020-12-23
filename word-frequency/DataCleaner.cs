@@ -19,7 +19,6 @@ namespace word_frequency
             return dataString.ToLower();
         }
 
-
         public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
             return dataString.Trim(trimmedCharacters);
