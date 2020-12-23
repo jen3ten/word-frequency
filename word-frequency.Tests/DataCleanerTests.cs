@@ -60,8 +60,9 @@ namespace word_frequency.Tests
         {
             string testString = "this isn't a stop word";
             string stopWord = "isn't";
+            expectedString = "this  a stop word";
 
-            Assert.True(DataCleaner.RemoveStopWord(testString, stopWord));
+            Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
         }
     }
 }

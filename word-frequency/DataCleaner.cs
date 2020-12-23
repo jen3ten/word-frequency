@@ -23,7 +23,7 @@ namespace word_frequency
             return dataArray;
         }
 
-        public static bool RemoveStopWord(string dataString, string stopWord)
+        public static string RemoveStopWord(string dataString, string stopWord)
         {
             throw new NotImplementedException();
         }
