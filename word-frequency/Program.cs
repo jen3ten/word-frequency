@@ -37,7 +37,7 @@ namespace word_frequency
 
             if (reader.DefineStream(delimitersDataFile))
             {
-                DataCleaner.Delimiters = reader.ConvertTextFileToCharArray(reader.Stream);
+                DataCleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
 
                 for (int i = 0; i < DataCleaner.Delimiters.Length; i++)
                 {
