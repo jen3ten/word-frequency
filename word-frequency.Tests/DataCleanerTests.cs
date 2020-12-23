@@ -64,5 +64,16 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
         }
+
+        [Fact]
+        public void RemoveStopWord_Should_Remove_One_Word_From_String_Ignoring_Case()
+        {
+            string testString = "this isn't a stop word";
+            string stopWord = "Isn't";
+            expectedString = "this  a stop word";
+
+            Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
+        }
+
     }
 }
