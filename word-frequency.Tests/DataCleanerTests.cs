@@ -70,5 +70,14 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedString, sut.TrimCharactersFromString(testString, testCharacters));
         }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_False_If_Dictionary_Is_Empty()
+        {
+            sut.TermFrequency = null;
+            string testString = "hello";
+
+            Assert.False(sut.ExistsInTermFrequency(testString));
+        }
     }
 }

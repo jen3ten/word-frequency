@@ -8,6 +8,7 @@ namespace word_frequency
     public class DataCleaner
     {
         public char[] Delimiters { get; set; }
+        public Dictionary<string, int> TermFrequency {get; set;}
 
         public string TrimString(string dataString)
         {
@@ -54,6 +55,9 @@ namespace word_frequency
             return dataArray;
         }
 
-
+        public bool ExistsInTermFrequency(string term)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
