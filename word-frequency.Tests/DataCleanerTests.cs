@@ -78,11 +78,11 @@ namespace word_frequency.Tests
             Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
         }
 
-        [Fact]
-        public void RemoveStopWord_Should_Remove_All_Instances_From_String()
+        [Theory]
+        [InlineData("this isn't a stop word, it really isn't.", "isn't")]
+        [InlineData("this isn'tisn't a stop word, it really isn't.", "isn't")]
+        public void RemoveStopWord_Should_Remove_All_Instances_From_String(string testString, string stopWord)
         {
-            testString = "this isn't a stop word, it really isn't.";
-            string stopWord = "isn't";
             expectedString = "this  a stop word, it really .";
 
             Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
