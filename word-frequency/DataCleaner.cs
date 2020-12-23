@@ -22,5 +22,10 @@ namespace word_frequency
             string[] dataArray = dataString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             return dataArray;
         }
+
+        public static bool ContainsStopWord(string dataString)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

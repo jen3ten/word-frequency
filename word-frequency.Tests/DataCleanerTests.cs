@@ -54,5 +54,13 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString, testDelimiters));
         }
+
+        [Fact]
+        public void ContainsStopWord_Should_Return_True_If_String_Contains_Stop_Word()
+        {
+            string testString = "this isn't a stop word";
+
+            Assert.True(DataCleaner.ContainsStopWord(testString));
+        }
     }
 }
