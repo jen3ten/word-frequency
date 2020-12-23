@@ -58,24 +58,24 @@ namespace word_frequency
             return textList;
         }
 
-        public char[] ConvertTextFileToCharArray(StreamReader stream)
-        {
-            string textString = " "; //adds whitespace to char array
-            using (stream)
-            {
-                string line;
-                while ((line = stream.ReadLine()) != null)
-                {
-                    textString += line;
-                }
+        //public char[] ConvertTextFileToCharArray(StreamReader stream)
+        //{
+        //    string textString = " "; //adds whitespace to char array
+        //    using (stream)
+        //    {
+        //        string line;
+        //        while ((line = stream.ReadLine()) != null)
+        //        {
+        //            textString += line;
+        //        }
 
-                StringReader sr = new StringReader(textString);
-                char[] charArray = new char[textString.Length];
+        //        StringReader sr = new StringReader(textString);
+        //        char[] charArray = new char[textString.Length];
 
-                sr.Read(charArray);
-                return charArray;
-            }
-        }
+        //        sr.Read(charArray);
+        //        return charArray;
+        //    }
+        //}
 
     }
 }

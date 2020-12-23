@@ -18,9 +18,9 @@ namespace word_frequency
             List<string> stopWords;
             string text1Data;
             string text2Data;
-            //char[] delimiters;
 
             DataReader reader = new DataReader(filePath);
+            DataCleaner cleaner = new DataCleaner();
 
             //if (reader.DefineStream(stopWordsDataFile))
             //{
@@ -37,11 +37,11 @@ namespace word_frequency
 
             if (reader.DefineStream(delimitersDataFile))
             {
-                DataCleaner.Delimiters = reader.ConvertTextFileToCharArray(reader.Stream);
+                cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
 
-                for (int i = 0; i < DataCleaner.Delimiters.Length; i++)
+                for (int i = 0; i < cleaner.Delimiters.Length; i++)
                 {
-                    Console.WriteLine(DataCleaner.Delimiters[i]);
+                    Console.WriteLine(cleaner.Delimiters[i]);
                 }
             }
             Console.WriteLine();
@@ -49,8 +49,7 @@ namespace word_frequency
             if (reader.DefineStream(text1DataFile))
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
-                //char[] delimiters = { ' ', '-' };
-                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, DataCleaner.Delimiters);
+                string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
                 for (int i = 0; i < text1Words.Length; i++)
                 {
                     Console.WriteLine(text1Words[i]);
@@ -61,8 +60,7 @@ namespace word_frequency
             if (reader.DefineStream(text2DataFile))
             {
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
-                //char[] delimiters = { ' ', '-'};
-                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, DataCleaner.Delimiters);
+                string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
                 for (int i = 0; i < text2Words.Length; i++)
                 {
                     Console.WriteLine(text2Words[i]);
