@@ -39,7 +39,7 @@ namespace word_frequency.Tests
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_And_Remove_WhiteSpace()
         {
-            string testString = " One two  Three";
+            testString = " One two  Three";
             string[] expectedArray = { "One", "two", "Three"};
 
             Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString, new char[] {' '}));
@@ -48,7 +48,7 @@ namespace word_frequency.Tests
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_At_Multiple_Delimiters()
         {
-            string testString = " One--two  Three,four five six-seven";
+            testString = " One--two  Three,four five six-seven";
             char[] testDelimiters = { ' ', '-', ',' };
             string[] expectedArray = { "One", "two", "Three", "four", "five", "six", "seven" };
 
@@ -58,7 +58,7 @@ namespace word_frequency.Tests
         [Fact]
         public void RemoveStopWord_Should_Remove_One_Word_From_String()
         {
-            string testString = "this isn't a stop word";
+            testString = "this isn't a stop word";
             string stopWord = "isn't";
             expectedString = "this  a stop word";
 
@@ -78,5 +78,14 @@ namespace word_frequency.Tests
             Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
         }
 
+        [Fact]
+        public void RemoveStopWord_Should_Remove_All_Instances_From_String()
+        {
+            testString = "this isn't a stop word, it really isn't.";
+            string stopWord = "isn't";
+            expectedString = "this  a stop word, it really .";
+
+            Assert.Equal(expectedString, DataCleaner.RemoveStopWord(testString, stopWord));
+        }
     }
 }
