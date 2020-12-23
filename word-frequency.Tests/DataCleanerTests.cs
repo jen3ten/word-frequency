@@ -54,5 +54,15 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString, testDelimiters));
         }
+
+        [Fact]
+        public void TrimCharactersFromString_Should_Remove_Question_Mark_From_Lead_and_Trail_Of_String()
+        {
+            string testString = "hello?";
+            char[] testCharacters = { '?'};
+            expectedString = "hello";
+
+            Assert.Equal(expectedString, DataCleaner.TrimCharactersFromString(testString, testCharacters));
+        }
     }
 }
