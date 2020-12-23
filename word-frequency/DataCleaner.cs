@@ -25,7 +25,12 @@ namespace word_frequency
 
         public static string RemoveStopWord(string dataString, string stopWord)
         {
-            throw new NotImplementedException();
+            int stopWordIndex = dataString.IndexOf(stopWord);
+            if(stopWordIndex >= 0)
+            {
+                dataString = dataString.Remove(stopWordIndex, stopWord.Length);
+            }
+            return dataString;
         }
     }
 }
