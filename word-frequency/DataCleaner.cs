@@ -31,7 +31,7 @@ namespace word_frequency
 
         public static string[] SplitStringOnRegExPattern(string input, string pattern)
         {
-            string[] inputWords = Regex.Split(input, pattern);
+            string[] inputWords = Regex.Split(input, pattern, RegexOptions.IgnoreCase);
             return inputWords;
         }
 
