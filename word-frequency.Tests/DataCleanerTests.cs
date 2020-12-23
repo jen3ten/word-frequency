@@ -33,26 +33,29 @@ namespace word_frequency.Tests
         [Fact]
         public void SplitStringAtDelimiters_Should_Return_String_Array()
         {
-            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters("", new char[] { }));
+            DataCleaner.Delimiters = new char[] { };
+
+            Assert.IsType<string[]>(DataCleaner.SplitStringAtDelimiters(""));
         }
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_And_Remove_WhiteSpace()
         {
             string testString = " One two  Three";
+            DataCleaner.Delimiters = new char[] { ' ' };
             string[] expectedArray = { "One", "two", "Three"};
 
-            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString, new char[] {' '}));
+            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString));
         }
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Split_At_Multiple_Delimiters()
         {
             string testString = " One--two  Three,four five six-seven";
-            char[] testDelimiters = { ' ', '-', ',' };
+            DataCleaner.Delimiters = new char[] { ' ', '-', ',' };
             string[] expectedArray = { "One", "two", "Three", "four", "five", "six", "seven" };
 
-            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString, testDelimiters));
+            Assert.Equal(expectedArray, DataCleaner.SplitStringAtDelimiters(testString));
         }
 
         [Fact]

@@ -39,10 +39,10 @@ namespace word_frequency
             {
                 DataCleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
 
-                for (int i = 0; i < DataCleaner.Delimiters.Length; i++)
-                {
-                    Console.WriteLine(DataCleaner.Delimiters[i]);
-                }
+                //for (int i = 0; i < DataCleaner.Delimiters.Length; i++)
+                //{
+                //    Console.WriteLine(DataCleaner.Delimiters[i]);
+                //}
             }
             Console.WriteLine();
 
@@ -50,7 +50,7 @@ namespace word_frequency
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
                 //char[] delimiters = { ' ', '-' };
-                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, DataCleaner.Delimiters);
+                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data);
                 for (int i = 0; i < text1Words.Length; i++)
                 {
                     Console.WriteLine(text1Words[i]);
@@ -62,7 +62,7 @@ namespace word_frequency
             {
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
                 //char[] delimiters = { ' ', '-'};
-                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data, DataCleaner.Delimiters);
+                string[] text2Words = DataCleaner.SplitStringAtDelimiters(text2Data);
                 for (int i = 0; i < text2Words.Length; i++)
                 {
                     Console.WriteLine(text2Words[i]);
