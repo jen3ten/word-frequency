@@ -56,11 +56,12 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void ContainsStopWord_Should_Return_True_If_String_Contains_Stop_Word()
+        public void RemoveStopWord_Should_Remove_One_Word_From_String()
         {
             string testString = "this isn't a stop word";
+            string stopWord = "isn't";
 
-            Assert.True(DataCleaner.ContainsStopWord(testString));
+            Assert.True(DataCleaner.RemoveStopWord(testString, stopWord));
         }
     }
 }
