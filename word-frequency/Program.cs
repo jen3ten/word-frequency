@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace word_frequency
 {
@@ -14,9 +15,10 @@ namespace word_frequency
             string text1DataFile = "Text1.txt";
             string text2DataFile = "Text2.txt";
 
-            //List<string> stopWords;
+            List<string> stopWords = null;
+            //string[] stopWords;
             string stopWordsData;
-            string text1Data;
+            string text1Data = null ;
             string text2Data;
 
             DataReader reader = new DataReader(filePath);
@@ -38,25 +40,35 @@ namespace word_frequency
                     // conversion to lower case is not necessary
                 stopWordsData = reader.ConvertTextFileToString(reader.Stream);
                 char[] delimiters = { ' ', '\t' };
-                string[] stopWords = DataCleaner.SplitStringAtDelimiters(stopWordsData, delimiters);
-                for (int i = 0; i < stopWords.Length; i++)
+                stopWords = DataCleaner.SplitStringAtDelimiters(stopWordsData, delimiters).ToList(); ;
+                //for (int i = 0; i < stopWords.Length; i++)
+                //{
+                //    Console.WriteLine(stopWords[i]);
+
+                //}
+            }
+            Console.WriteLine();
+
+
+            if (reader.DefineStream(text1DataFile))
+            {
+                text1Data = reader.ConvertTextFileToString(reader.Stream);
+                Console.WriteLine(text1Data);
+                char[] delimiters = { ' ', '-' };
+                string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, delimiters);
+                for (int i = 0; i < text1Words.Length; i++)
                 {
-                    Console.WriteLine(stopWords[i]);
+                    Console.WriteLine(text1Words[i]);
                 }
             }
             Console.WriteLine();
 
-            //if (reader.DefineStream(text1DataFile))
-            //{
-            //    text1Data = reader.ConvertTextFileToString(reader.Stream);
-            //    char[] delimiters = { ' ', '-' };
-            //    string[] text1Words = DataCleaner.SplitStringAtDelimiters(text1Data, delimiters);
-            //    for (int i = 0; i < text1Words.Length; i++)
-            //    {
-            //        Console.WriteLine(text1Words[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+            foreach(string word in stopWords)
+            {
+                text1Data = DataCleaner.RemoveStopWord(text1Data, word);
+            }
+            Console.WriteLine(text1Data);
+
 
             //if (reader.DefineStream(text2DataFile))
             //{
