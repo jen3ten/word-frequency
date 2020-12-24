@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace word_frequency
@@ -13,13 +14,14 @@ namespace word_frequency
         }
 
         public string FilePath { get; set; }
-        public StreamReader Stream { get; set; }
+        public StreamReader StreamReader { get; set; }
+        public StreamWriter StreamWriter { get; set; }
 
-        public bool DefineStream(string fileName)
+        public bool DefineStreamReader(string fileName)
         {
             try
             {
-                Stream = new StreamReader(FilePath + fileName);
+                StreamReader = new StreamReader(FilePath + fileName);
                 return true;
             }
             catch (Exception e)
@@ -57,6 +59,33 @@ namespace word_frequency
                 }
             }
             return textList;
+        }
+
+        public bool DefineStreamWriter(string fileName)
+        {
+            try
+            {
+                StreamWriter = new StreamWriter(FilePath + fileName);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR connecting to {fileName}:");
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public void OutputResultsToTextFile(StreamWriter stream, Dictionary<string, int> termFrequency)
+        {
+
+            using (stream)
+            {
+                foreach (var item in termFrequency.OrderByDescending(key => key.Value))
+                {
+                    stream.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
+                }
+            }
         }
     }
 }

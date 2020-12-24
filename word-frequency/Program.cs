@@ -13,6 +13,9 @@ namespace word_frequency
             string stopWordsDataFile = "stopwords.txt";
             string text1DataFile = "Text1.txt";
             string text2DataFile = "Text2.txt";
+            string text1TermFrequency = "Text1frequency.txt";
+            string text2TermFrequency = "Text2frequency.txt";
+
             string delimitersDataFile = "delimiters.txt";
 
             List<string> stopWords = new List<string>();
@@ -36,9 +39,9 @@ namespace word_frequency
             do
             {
                 // create a string list of stop words
-                if (reader.DefineStream(stopWordsDataFile))
+                if (reader.DefineStreamReader(stopWordsDataFile))
                 {
-                    stopWords = reader.ConvertTextFileToList(reader.Stream);
+                    stopWords = reader.ConvertTextFileToList(reader.StreamReader);
                     incorrectPath = false;
                 }
                 else
@@ -52,9 +55,9 @@ namespace word_frequency
             } while (incorrectPath);
 
             // create a char array of delimiters
-            if (reader.DefineStream(delimitersDataFile))
+            if (reader.DefineStreamReader(delimitersDataFile))
             {
-                cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
+                cleaner.CreateDelimiterArrayFromTextFile(reader.StreamReader);
             }
 
             Console.Clear();
@@ -75,38 +78,54 @@ namespace word_frequency
                 {
                     case "1":
                         Console.WriteLine("DECLARATION OF INDEPENDENCE:\n");
-                        if (reader.DefineStream(text1DataFile))
+                        if (reader.DefineStreamReader(text1DataFile))
                         {
-                            text1Data = reader.ConvertTextFileToString(reader.Stream);
+                            text1Data = reader.ConvertTextFileToString(reader.StreamReader);
                             Console.WriteLine(text1Data);
                         }
                         break;
                     case "2":
                         Console.WriteLine("ALICE IN WONDERLAND:\n");
-                        if (reader.DefineStream(text2DataFile))
+                        if (reader.DefineStreamReader(text2DataFile))
                         {
-                            text2Data = reader.ConvertTextFileToString(reader.Stream);
+                            text2Data = reader.ConvertTextFileToString(reader.StreamReader);
                             Console.WriteLine(text2Data);
                         }
                         break;
                     case "3":
                         Console.WriteLine("TOP 20 TERMS FOR DECLARATION OF INDEPENDENCE:\n");
-                        if (reader.DefineStream(text1DataFile))
+
+                        // normalize text and print frequency of top 20 terms
+                        if (reader.DefineStreamReader(text1DataFile))
                         {
-                            text1Data = reader.ConvertTextFileToString(reader.Stream);
+                            text1Data = reader.ConvertTextFileToString(reader.StreamReader);
                             string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
 
                             cleaner.GetTermFrequencyFromStringArray(text1Words, stopWords);
                         }
+
+                        // output all terms and frequency to text file
+                        if (reader.DefineStreamWriter(text1TermFrequency))
+                        {
+                            reader.OutputResultsToTextFile(reader.StreamWriter, cleaner.TermFrequency);
+                        }
                         break;
                     case "4":
-                        Console.WriteLine("TOP 20 TERMS FOR ALICE IN WONDERLAND:\n");
-                        if (reader.DefineStream(text2DataFile))
+                        Console.WriteLine("TOP 20 TERMS FOR ALICE IN WONDERLAND:\n"); 
+
+                        // normalize text and print frequency of top 20 terms
+                        if (reader.DefineStreamReader(text2DataFile))
                         {
-                            text2Data = reader.ConvertTextFileToString(reader.Stream);
+                            text2Data = reader.ConvertTextFileToString(reader.StreamReader);
                             string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
 
                             cleaner.GetTermFrequencyFromStringArray(text2Words, stopWords);
+                        }
+
+                        // output all terms and frequency to text file
+                        if (reader.DefineStreamWriter(text2TermFrequency))
+                        {
+                            reader.OutputResultsToTextFile(reader.StreamWriter, cleaner.TermFrequency);
                         }
                         break;
                     case "5":

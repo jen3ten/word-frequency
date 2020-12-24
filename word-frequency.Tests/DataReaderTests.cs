@@ -16,29 +16,29 @@ namespace word_frequency.Tests
         [Fact]
         public void DefineStream_Should_Return_True_If_File_Successfully_Read()
         {
-            Assert.True(sut.DefineStream("TestFile1.txt"));
+            Assert.True(sut.DefineStreamReader("TestFile1.txt"));
         }
 
         [Fact]
         public void DefineStream_Should_Return_False_If_File_Cannot_Be_Read()
         {
-            Assert.False(sut.DefineStream(""));
+            Assert.False(sut.DefineStreamReader(""));
         }
 
         [Fact]
         public void ConvertTextFileToString_Should_Return_String_Type()
         {
-            sut.DefineStream("TestFile1.txt");
+            sut.DefineStreamReader("TestFile1.txt");
 
-            Assert.IsType<string>(sut.ConvertTextFileToString(sut.Stream));
+            Assert.IsType<string>(sut.ConvertTextFileToString(sut.StreamReader));
         }
 
         [Fact]
         public void ConvertTextFileToList_Should_Return_List_Type()
         {
-            sut.DefineStream("TestFile1.txt");
+            sut.DefineStreamReader("TestFile1.txt");
 
-            Assert.IsType<List<string>>(sut.ConvertTextFileToList(sut.Stream));
+            Assert.IsType<List<string>>(sut.ConvertTextFileToList(sut.StreamReader));
         }
     }
 }
