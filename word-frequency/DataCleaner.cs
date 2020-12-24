@@ -76,7 +76,7 @@ namespace word_frequency
 
         public void RemoveDuplicateTerm(string term)
         {
-
+            TermFrequency.Remove(term);
         }
     }
 }
