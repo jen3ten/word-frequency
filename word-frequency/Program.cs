@@ -85,15 +85,24 @@ namespace word_frequency
                 //}
 
                 // add words to TermFrequency dictionary with term frequency
-                foreach (string word in text2Words)
+                for (int i = 0; i < text2Words.Length; i++)
                 {
-                    if (cleaner.ExistsInTermFrequency(word))
+                    // first, remove apostrophes from words
+                    if (text2Words[i].Contains('\''))
                     {
-                        cleaner.IncreaseTermFrequency(word, 1);
+                        Console.Write(text2Words[i] + ", ");
+                        text2Words[i] = cleaner.RemoveApostropheSubstringFromWord(text2Words[i]);
+                        Console.WriteLine(text2Words[i]);
+
+                    }
+
+                    if (cleaner.ExistsInTermFrequency(text2Words[i]))
+                    {
+                        cleaner.IncreaseTermFrequency(text2Words[i], 1);
                     }
                     else
                     {
-                        cleaner.AddTermToTermFrequency(word);
+                        cleaner.AddTermToTermFrequency(text2Words[i]);
                     }
                 }
 
@@ -116,15 +125,15 @@ namespace word_frequency
                     string stem = porterStemmer.StemWord(term);
                     if (!stem.Equals(term))
                     {
-                        Console.WriteLine($"{stem} derived from {term}");
+                        //Console.WriteLine($"{stem} derived from {term}");
                     }
                 }
 
                 // print out terms and frequency in descending order
-                //foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
-                //{
-                //    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
-                //}
+                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                {
+                    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
+                }
             }
             Console.WriteLine();
 

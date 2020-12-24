@@ -71,7 +71,10 @@ namespace word_frequency
 
         public void AddTermToTermFrequency(string term)
         {
-            TermFrequency.Add(term.ToLower(), 1);
+            if(!String.IsNullOrEmpty(term))
+            {
+                TermFrequency.Add(term.ToLower(), 1);
+            }
         }
 
         public void AddStemWordToTermFrequency(string term, int frequency)
@@ -94,21 +97,25 @@ namespace word_frequency
             TermFrequency.Remove(stopWord.ToLower());
         }
 
-        public string RemoveApostropheSubstringFromTerm(string term)
+        public string RemoveApostropheSubstringFromWord(string word)
         {
-            int index = term.IndexOf('\''); 
+            int index = word.IndexOf('\'');
 
-            if(index == 0) // remove leading apostrophe, such as 'tis
+            if (index == 0) // remove leading apostrophe, such as 'tis
             {
-                term.Remove(0, 1);
+                word = word.Remove(0, 1);
             }
-            else // remove substring after the apostrophe for possessive and contractions, such as she's and he'll
+            else if(index == word.Length - 1) // remove trailing apostrophe
             {
-                int subStringLength = term.Length - index;
-                term.Remove(index, subStringLength);
+                word = word.Remove(index, 1);
+            }
+            else if (word.ToLower().EndsWith("\'s") || word.ToLower().EndsWith("\'ll")) // remove 's or 'll substring 
+            {
+                int subStringLength = word.Length - index;
+                word = word.Remove(index, subStringLength);
             }
 
-            return term;
+            return word;
         }
     }
 }
