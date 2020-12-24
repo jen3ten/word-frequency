@@ -93,5 +93,22 @@ namespace word_frequency
         {
             TermFrequency.Remove(stopWord.ToLower());
         }
+
+        public string RemoveApostropheSubstringFromTerm(string term)
+        {
+            int index = term.IndexOf('\''); 
+
+            if(index == 0) // remove leading apostrophe, such as 'tis
+            {
+                term.Remove(0, 1);
+            }
+            else // remove substring after the apostrophe for possessive and contractions, such as she's and he'll
+            {
+                int subStringLength = term.Length - index;
+                term.Remove(index, subStringLength);
+            }
+
+            return term;
+        }
     }
 }
