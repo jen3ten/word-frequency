@@ -18,7 +18,7 @@ This application normalizes text and prints frequency of terms for:
 
 ### Stop Words
 
-The list of stop words is contained in `stopwords.txt`.  Stop words, such as 'I', 'they', 'have', 'like', 'yours', etc., will be removed because they don’t add any semantic value and are unlikely to be useful.
+The list of stop words is contained in [Text1- Declaration of Independence](./word-frequency/Data/stopwords.txt).  Stop words, such as 'I', 'they', 'have', 'like', 'yours', etc., will be removed because they don’t add any semantic value and are unlikely to be useful.
 
 ### Stemming Algorithm
 
