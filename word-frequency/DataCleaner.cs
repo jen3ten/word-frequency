@@ -73,5 +73,10 @@ namespace word_frequency
         {
             TermFrequency[term] += increaseFrequency;
         }
+
+        public void RemoveDuplicateTerm(string term)
+        {
+
+        }
     }
 }
