@@ -2,13 +2,13 @@
 
 ## Purpose
 
-This C# console app is a text extraction tool that will print the 20 most commonly occuring terms for a given text file, in descending order of frequency. 
+This C# console app is a text normalization tool that will print the 20 most commonly occuring terms for a given text file, in descending order of frequency. 
 
 See [NLP, AI, and Machine Learning: What's the Difference?](https://monkeylearn.com/blog/nlp-ai/#:~:text=Natural%20Language%20Processing%20(NLP)%20is,grammar%20checking%2C%20or%20topic%20classification.) for more information about how computers can be used to understand human language in order to interact more effectively with customers or automate tasks.  
 
 ## Requirements
 
-It reads in a text file, removes stop words, removes all non-alphabetical text, stems words into their root form , computes the frequency of each term, and prints out the 20 most commonly occurring terms in descending order of frequency. 
+The application reads in a text file, removes stop words, removes all non-alphabetical text, stems words into their root form , computes the frequency of each term, and prints out the 20 most commonly occurring terms in descending order of frequency. 
 
 ### Stop Words
 
@@ -47,7 +47,7 @@ Single apostrophes, leading and trailing apostrophes, possessives, and some cont
 
 - ### Add Words and Frequency to Dictionary 
 
-Iterate through the array of words and add the words to a dictionary.  The string word is the 'key' and the integer count of the word's frequency is the 'value'.  This process creates a collection of non-duplicated words and their frequency.  
+The application then iterated through the array of words and added the words to a dictionary.  The string word is the 'key' and the integer count of the word's frequency is the 'value'.  This process created a collection of non-duplicated words and their frequency.  
 
 By converting the large array of words into a dictionary first, the array of words is only iterated once.  Future manipulations of the collection, for removal of stop words or stemming, will occur more quickly by looking up words in the efficient and smaller dictionary.
 
@@ -58,3 +58,13 @@ Stop word removal was performed before stemming, so that words like 'was' don't 
 - ### Stemming
 
 The Porter Stemming algorithm was then used to convert words to their stem.  If the word changed, the dictionary was checked for the stem's existence.  If the stem already existed, it was combined with its match.  If it didn't exist, it was removed from the dictionary, and re-added as a new term.
+
+## Running the Application
+
+To run the application, please clone this project to your machine.  Open it in Visual Studio and run the application.  A user menu will appear with directions.  You will be prompted to enter the file path for the application location.
+
+## Results
+
+The result of running the normalization process and determing the frequency of each term can be found in the following files:
+[Text1- Declaration of Independence Terms & Frequency](~/word-frequency/Data/Text1frequency.txt)
+[Text2- Alice in Wonderland Terms & Frequency](~/word-frequency/Data/Text2frequency.txt)
