@@ -67,7 +67,7 @@ The Porter Stemming algorithm was then used to convert words to their stem.  If 
 
 ## Running the Application
 
-To run the application, please clone this project to your machine.  Open it in Visual Studio and run the application.  A user menu will appear with directions.  You will be prompted to enter the file path for the application location.
+To run the application, please clone this project to your machine.  Open it in Visual Studio and run the application.  A user menu will appear with directions.  You will be prompted to enter the file path for the `word-frequency` application.
 
 ## Results
 
