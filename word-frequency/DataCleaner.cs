@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace word_frequency
@@ -10,14 +11,11 @@ namespace word_frequency
         public char[] Delimiters { get; set; }
         public Dictionary<string, int> TermFrequency {get; set;}
 
+        public PorterStemmer porterStemmer;
+
         public DataCleaner()
         {
             TermFrequency = new Dictionary<string, int>();
-        }
-
-        public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
-        {
-            return dataString.Trim(trimmedCharacters);
         }
 
         public void CreateDelimiterArrayFromTextFile(StreamReader stream)
@@ -100,6 +98,75 @@ namespace word_frequency
             }
 
             return word;
+        }
+
+        public void GetTermFrequencyFromStringArray(string[] data, List<string> stopWords)
+        {
+            porterStemmer = new PorterStemmer();
+
+            // add words to TermFrequency dictionary by name and frequency
+            for (int i = 0; i < data.Length; i++)
+            {
+                // first, remove apostrophes from words
+                if (data[i].Contains('\''))
+                {
+                    data[i] = RemoveApostropheSubstringFromWord(data[i]);
+                }
+
+                // then, add as a new entry or increase frequency of existing entry
+                if (ExistsInTermFrequency(data[i]))
+                {
+                    IncreaseTermFrequency(data[i], 1);
+                }
+                else
+                {
+                    AddTermToTermFrequency(data[i]);
+                }
+            }
+
+            // remove stop words from TermFrequency dictionary
+            foreach (string word in stopWords)
+            {
+                if (ExistsInTermFrequency(word))
+                {
+                    RemoveStopWord(word);
+                }
+            }
+
+            // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
+            string originalTerm;
+            int frequency;
+            Dictionary<string, int> TermFrequencyCopy = new Dictionary<string, int>(TermFrequency);
+            foreach (var item in TermFrequencyCopy)
+            {
+                originalTerm = item.Key;
+                frequency = item.Value;
+                string stem = porterStemmer.StemWord(originalTerm);
+                if (!stem.Equals(originalTerm))
+                {
+                    // if the stem already exists in the dictionary, combine its frequency with existing frequency
+                    if (ExistsInTermFrequency(stem))
+                    {
+                        IncreaseTermFrequency(stem, frequency);
+                    }
+                    else
+                    {
+                        // else, add new stem word and frequency to dictionary
+                        AddStemWordToTermFrequency(stem, frequency);
+                    }
+
+                    // remove the original term from the dictionary
+                    RemoveTerm(originalTerm);
+                }
+            }
+
+            // print out terms and frequency in descending order
+            foreach (var item in TermFrequency.OrderByDescending(key => key.Value).Take(20))
+            {
+                Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
+            }
+
+            Console.WriteLine();
         }
     }
 }

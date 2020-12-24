@@ -9,133 +9,139 @@ namespace word_frequency
     {
         static void Main(string[] args)
         {
-            string applicationLocation = "C:/Users/jenev/source/repos/CleFedReserveBank";
-            string filePath = applicationLocation + "/word-frequency/word-frequency/Data/";
+            string applicationLocation;
             string stopWordsDataFile = "stopwords.txt";
             string text1DataFile = "Text1.txt";
             string text2DataFile = "Text2.txt";
+            string text1TermFrequency = "Text1frequency.txt";
+            string text2TermFrequency = "Text2frequency.txt";
+
             string delimitersDataFile = "delimiters.txt";
 
             List<string> stopWords = new List<string>();
             string text1Data;
             string text2Data;
 
+            Console.WriteLine("TEXT NORMALIZATION AND TERM FREQUENCY FINDER\n");
+            Console.WriteLine("This application reads in a text file, removes stop words, removes all non-alphabetical text, stems words into their root form using the Porter stemmer, computes the frequency of each term, and prints out the 20 most commonly occurring terms in descending order of frequency.\n");
+            Console.WriteLine("The input files are:");
+            Console.WriteLine("- (text1.txt) The Declaration of Independence");
+            Console.WriteLine("- (text2.txt) Alice in Wonderland\n");
+            Console.Write("Please enter the file path for this application, for example 'C:/Users/jenev/source/repos': ");
+            applicationLocation = Console.ReadLine();
+            Console.WriteLine();
+            string filePath = applicationLocation + "/word-frequency/word-frequency/Data/";
+
             DataReader reader = new DataReader(filePath);
             DataCleaner cleaner = new DataCleaner();
-            PorterStemmer porterStemmer = new PorterStemmer();
 
-            // create a string list of stop words
-            if (reader.DefineStream(stopWordsDataFile))
+            bool incorrectPath = true;
+            do
             {
-                stopWords = reader.ConvertTextFileToList(reader.Stream);
-            }
+                // create a string list of stop words
+                if (reader.DefineStreamReader(stopWordsDataFile))
+                {
+                    stopWords = reader.ConvertTextFileToList(reader.StreamReader);
+                    incorrectPath = false;
+                }
+                else
+                {
+                    Console.Write("\nThe provided file path is inaccessible.  Please enter a correct file path: ");
+                    applicationLocation = Console.ReadLine();
+                    Console.WriteLine();
+                    filePath = applicationLocation + "/word-frequency/word-frequency/Data/";
+                    reader = new DataReader(filePath);
+                }
+            } while (incorrectPath);
 
             // create a char array of delimiters
-            if (reader.DefineStream(delimitersDataFile))
+            if (reader.DefineStreamReader(delimitersDataFile))
             {
-                cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
+                cleaner.CreateDelimiterArrayFromTextFile(reader.StreamReader);
             }
 
-            // 
-            if (reader.DefineStream(text1DataFile))
+            Console.Clear();
+            bool showMenu = true;
+            do
             {
-                text1Data = reader.ConvertTextFileToString(reader.Stream);
-                string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
-                //for (int i = 0; i < text1Words.Length; i++)
-                //{
-                //    Console.WriteLine(text1Words[i]);
-                //}
+                Console.WriteLine("TEXT NORMALIZATION AND TERM FREQUENCY FINDER\n");
+                Console.WriteLine("1. View text for Declaration of Independence");
+                Console.WriteLine("2. View text for Alice in Wonderland");
+                Console.WriteLine("3. Show term frequency for Declaration of Independence");
+                Console.WriteLine("4. Show term frequency for Alice in Wonderland");
+                Console.WriteLine("5. Exit");
+                Console.Write("\nPlease enter a menu option: ");
+                string menuOption = Console.ReadLine();
+                Console.Clear();
 
-                //foreach(string term in text1Words)
-                //{
-                //    if (cleaner.ExistsInTermFrequency(term))
-                //    {
-                //        cleaner.IncreaseTermFrequency(term, 1);
-                //    }
-                //    else
-                //    {
-                //        cleaner.AddTermToTermFrequency(term);
-                //    }
-                //}
-
-                //foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
-                //{
-                //    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
-                //}
-
-            }
-            Console.WriteLine();
-
-            if (reader.DefineStream(text2DataFile))
-            {
-                // create array of words from text file
-                text2Data = reader.ConvertTextFileToString(reader.Stream);
-                string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
-
-                // add words to TermFrequency dictionary by name and frequency
-                for (int i = 0; i < text2Words.Length; i++)
+                switch (menuOption)
                 {
-                    // first, remove apostrophes from words
-                    if (text2Words[i].Contains('\''))
-                    {
-                        text2Words[i] = cleaner.RemoveApostropheSubstringFromWord(text2Words[i]);
-                    }
-
-                    // then, add as a new entry or increase frequency of existing entry
-                    if (cleaner.ExistsInTermFrequency(text2Words[i]))
-                    {
-                        cleaner.IncreaseTermFrequency(text2Words[i], 1);
-                    }
-                    else
-                    {
-                        cleaner.AddTermToTermFrequency(text2Words[i]);
-                    }
-                }
-
-                // remove stop words from TermFrequency dictionary
-                foreach (string word in stopWords)
-                {
-                    if (cleaner.ExistsInTermFrequency(word))
-                    {
-                        cleaner.RemoveStopWord(word);
-                    }
-                }
-
-                // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
-                string originalTerm;
-                int frequency;
-                Dictionary<string, int> TermFrequencyCopy = new Dictionary<string, int>(cleaner.TermFrequency);
-                foreach (var item in TermFrequencyCopy)
-                {
-                    originalTerm = item.Key;
-                    frequency = item.Value;
-                    string stem = porterStemmer.StemWord(originalTerm);
-                    if (!stem.Equals(originalTerm))
-                    {
-                        // if the stem already exists in the dictionary, combine its frequency with existing frequency
-                        if (cleaner.ExistsInTermFrequency(stem)) 
+                    case "1":
+                        Console.WriteLine("DECLARATION OF INDEPENDENCE:\n");
+                        if (reader.DefineStreamReader(text1DataFile))
                         {
-                            cleaner.IncreaseTermFrequency(stem, frequency); 
+                            text1Data = reader.ConvertTextFileToString(reader.StreamReader);
+                            Console.WriteLine(text1Data);
                         }
-                        else
+                        break;
+                    case "2":
+                        Console.WriteLine("ALICE IN WONDERLAND:\n");
+                        if (reader.DefineStreamReader(text2DataFile))
                         {
-                            // else, add new stem word and frequency to dictionary
-                            cleaner.AddStemWordToTermFrequency(stem, frequency); 
+                            text2Data = reader.ConvertTextFileToString(reader.StreamReader);
+                            Console.WriteLine(text2Data);
+                        }
+                        break;
+                    case "3":
+                        Console.WriteLine("TOP 20 TERMS FOR DECLARATION OF INDEPENDENCE:\n");
+
+                        // normalize text and print frequency of top 20 terms
+                        if (reader.DefineStreamReader(text1DataFile))
+                        {
+                            text1Data = reader.ConvertTextFileToString(reader.StreamReader);
+                            string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
+
+                            cleaner.GetTermFrequencyFromStringArray(text1Words, stopWords);
                         }
 
-                        // remove the original term from the dictionary
-                        cleaner.RemoveTerm(originalTerm); 
-                    }
+                        // output all terms and frequency to text file
+                        if (reader.DefineStreamWriter(text1TermFrequency))
+                        {
+                            reader.OutputResultsToTextFile(reader.StreamWriter, cleaner.TermFrequency);
+                        }
+                        break;
+                    case "4":
+                        Console.WriteLine("TOP 20 TERMS FOR ALICE IN WONDERLAND:\n"); 
+
+                        // normalize text and print frequency of top 20 terms
+                        if (reader.DefineStreamReader(text2DataFile))
+                        {
+                            text2Data = reader.ConvertTextFileToString(reader.StreamReader);
+                            string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
+
+                            cleaner.GetTermFrequencyFromStringArray(text2Words, stopWords);
+                        }
+
+                        // output all terms and frequency to text file
+                        if (reader.DefineStreamWriter(text2TermFrequency))
+                        {
+                            reader.OutputResultsToTextFile(reader.StreamWriter, cleaner.TermFrequency);
+                        }
+                        break;
+                    case "5":
+                        Console.WriteLine("Good-bye");
+                        showMenu = false;
+                        break;
+                    default:
+                        Console.WriteLine("Menu selection was invalid.  Please try again.\n");
+                        break;
                 }
 
-                // print out terms and frequency in descending order
-                foreach (var item in cleaner.TermFrequency.OrderByDescending(key => key.Value).Take(20))
-                {
-                    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
-                }
-            }
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
+                Console.Clear();
 
-            Console.ReadKey();
+            } while (showMenu);
         }
     }
 }
