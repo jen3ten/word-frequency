@@ -15,16 +15,6 @@ namespace word_frequency
             TermFrequency = new Dictionary<string, int>();
         }
 
-        //public string TrimString(string dataString)
-        //{
-        //    return dataString.Trim();
-        //}
-
-        //public string StringToLowerCase(string dataString)
-        //{
-        //    return dataString.ToLower();
-        //}
-
         public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
             return dataString.Trim(trimmedCharacters);
@@ -47,12 +37,6 @@ namespace word_frequency
             StringReader sr = new StringReader(textString);
             sr.Read(Delimiters);
         }
-
-        //public static string[] SplitStringAtDelimiters(string dataString, char[] delimiters)
-        //{
-        //    string[] dataArray = dataString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
-        //    return dataArray;
-        //}
 
         public string[] SplitStringAtDelimiters(string dataString)
         {

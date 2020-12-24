@@ -40,7 +40,5 @@ namespace word_frequency.Tests
 
             Assert.IsType<List<string>>(sut.ConvertTextFileToList(sut.Stream));
         }
-
-
     }
 }
