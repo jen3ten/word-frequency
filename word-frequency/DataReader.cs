@@ -52,7 +52,7 @@ namespace word_frequency
                 string line;
                 while ((line = stream.ReadLine()) != null)
                 {
-                    textList.Add(line);
+                    textList.Add(line.Trim());
                 }
             }
             return textList;

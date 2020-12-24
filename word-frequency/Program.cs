@@ -16,25 +16,23 @@ namespace word_frequency
             string text2DataFile = "Text2.txt";
             string delimitersDataFile = "delimiters.txt";
 
-            List<string> stopWords;
+            List<string> stopWords = new List<string>();
             string text1Data;
             string text2Data;
 
             DataReader reader = new DataReader(filePath);
             DataCleaner cleaner = new DataCleaner();
 
-            //if (reader.DefineStream(stopWordsDataFile))
-            //{
-            //    stopWords = reader.ConvertTextFileToList(reader.Stream);
+            if (reader.DefineStream(stopWordsDataFile))
+            {
+                stopWords = reader.ConvertTextFileToList(reader.Stream);
 
-            //    for (int i = 0; i < stopWords.Count; i++)
-            //    {
-            //        stopWords[i] = DataCleaner.TrimString(stopWords[i]);
-            //        stopWords[i] = DataCleaner.StringToLowerCase(stopWords[i]);
-            //        Console.WriteLine(stopWords[i]);
-            //    }
-            //}
-            //Console.WriteLine();
+                //for (int i = 0; i < stopWords.Count; i++)
+                //{
+                //    Console.WriteLine(stopWords[i]);
+                //}
+            }
+            Console.WriteLine();
 
             if (reader.DefineStream(delimitersDataFile))
             {
@@ -94,6 +92,14 @@ namespace word_frequency
                     else
                     {
                         cleaner.AddTermToTermFrequency(term);
+                    }
+                }
+
+                foreach(string word in stopWords)
+                {
+                    if (cleaner.ExistsInTermFrequency(word))
+                    {
+                        cleaner.RemoveStopWord(word);
                     }
                 }
 

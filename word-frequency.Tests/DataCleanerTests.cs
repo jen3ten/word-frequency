@@ -18,21 +18,21 @@ namespace word_frequency.Tests
             sut.TermFrequency = new Dictionary<string, int>();
         }
 
-        [Fact]
-        public void TrimString_Should_Remove_Leading_And_Trailing_Spaces()
-        {
-            expectedString = "One";
+        //[Fact]
+        //public void TrimString_Should_Remove_Leading_And_Trailing_Spaces()
+        //{
+        //    expectedString = "One";
 
-            Assert.Equal(expectedString, sut.TrimString(testString));
-        }
+        //    Assert.Equal(expectedString, sut.TrimString(testString));
+        //}
 
-        [Fact]
-        public void StringToLowerCase_Should_Remove_All_Upper_Case_Letters()
-        {
-            expectedString = " one ";
+        //[Fact]
+        //public void StringToLowerCase_Should_Remove_All_Upper_Case_Letters()
+        //{
+        //    expectedString = " one ";
 
-            Assert.Equal(expectedString, sut.StringToLowerCase(testString));
-        }
+        //    Assert.Equal(expectedString, sut.StringToLowerCase(testString));
+        //}
 
         [Fact]
         public void SplitStringAtDelimiters_Should_Return_String_Array()
