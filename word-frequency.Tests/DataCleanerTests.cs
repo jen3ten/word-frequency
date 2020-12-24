@@ -111,6 +111,16 @@ namespace word_frequency.Tests
             Assert.True(sut.ExistsInTermFrequency(testString));
         }
 
+        [Fact]
+        public void AddKeyToTermFrequency_Should_Add_New_Key()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testString = "welcome";
+
+            sut.AddKeyToTermFrequency(testString);
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
 
     }
 }

@@ -63,5 +63,10 @@ namespace word_frequency
             }
             return false;
         }
+
+        public void AddKeyToTermFrequency(string term)
+        {
+
+        }
     }
 }
