@@ -74,6 +74,11 @@ namespace word_frequency
             TermFrequency.Add(term.ToLower(), 1);
         }
 
+        public void AddStemWordToTermFrequency(string term, int frequency)
+        {
+            TermFrequency.Add(term.ToLower(), frequency);
+        }
+
         public void IncreaseTermFrequency(string term, int increaseFrequency)
         {
             TermFrequency[term.ToLower()] += increaseFrequency;
