@@ -15,15 +15,15 @@ namespace word_frequency
             TermFrequency = new Dictionary<string, int>();
         }
 
-        public string TrimString(string dataString)
-        {
-            return dataString.Trim();
-        }
+        //public string TrimString(string dataString)
+        //{
+        //    return dataString.Trim();
+        //}
 
-        public string StringToLowerCase(string dataString)
-        {
-            return dataString.ToLower();
-        }
+        //public string StringToLowerCase(string dataString)
+        //{
+        //    return dataString.ToLower();
+        //}
 
         public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
@@ -82,6 +82,11 @@ namespace word_frequency
         public void RemoveDuplicateTerm(string term)
         {
             TermFrequency.Remove(term);
+        }
+
+        public void RemoveStopWord(string stopWord)
+        {
+            TermFrequency.Remove(stopWord.ToLower());
         }
     }
 }
