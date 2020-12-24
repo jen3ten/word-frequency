@@ -24,28 +24,19 @@ namespace word_frequency
             DataCleaner cleaner = new DataCleaner();
             PorterStemmer porterStemmer = new PorterStemmer();
 
+            // create a string list of stop words
             if (reader.DefineStream(stopWordsDataFile))
             {
                 stopWords = reader.ConvertTextFileToList(reader.Stream);
-
-                //for (int i = 0; i < stopWords.Count; i++)
-                //{
-                //    Console.WriteLine(stopWords[i]);
-                //}
             }
-            Console.WriteLine();
 
+            // create a char array of delimiters
             if (reader.DefineStream(delimitersDataFile))
             {
                 cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
-
-                //for (int i = 0; i < cleaner.Delimiters.Length; i++)
-                //{
-                //    Console.WriteLine(cleaner.Delimiters[i]);
-                //}
             }
-            Console.WriteLine();
 
+            // 
             if (reader.DefineStream(text1DataFile))
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
@@ -77,14 +68,11 @@ namespace word_frequency
 
             if (reader.DefineStream(text2DataFile))
             {
+                // create array of words from text file
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
                 string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
-                //for (int i = 0; i < text2Words.Length; i++)
-                //{
-                //    Console.WriteLine(text2Words[i]);
-                //}
 
-                // add words to TermFrequency dictionary with term frequency
+                // add words to TermFrequency dictionary by name and frequency
                 for (int i = 0; i < text2Words.Length; i++)
                 {
                     // first, remove apostrophes from words
@@ -93,6 +81,7 @@ namespace word_frequency
                         text2Words[i] = cleaner.RemoveApostropheSubstringFromWord(text2Words[i]);
                     }
 
+                    // then, add as a new entry or increase frequency of existing entry
                     if (cleaner.ExistsInTermFrequency(text2Words[i]))
                     {
                         cleaner.IncreaseTermFrequency(text2Words[i], 1);
@@ -122,15 +111,19 @@ namespace word_frequency
                     string stem = porterStemmer.StemWord(originalTerm);
                     if (!stem.Equals(originalTerm))
                     {
-                        if (cleaner.ExistsInTermFrequency(stem)) // if the stem word already exists in the dictionary
+                        // if the stem already exists in the dictionary, combine its frequency with existing frequency
+                        if (cleaner.ExistsInTermFrequency(stem)) 
                         {
-                            cleaner.IncreaseTermFrequency(stem, frequency);  // combine its frequency with existing frequency
+                            cleaner.IncreaseTermFrequency(stem, frequency); 
                         }
                         else
                         {
-                            cleaner.AddStemWordToTermFrequency(stem, frequency); // add new stem word and frequency to dictionary
+                            // else, add new stem word and frequency to dictionary
+                            cleaner.AddStemWordToTermFrequency(stem, frequency); 
                         }
-                        cleaner.RemoveTerm(originalTerm); // remove the original term from the dictionary
+
+                        // remove the original term from the dictionary
+                        cleaner.RemoveTerm(originalTerm); 
                     }
                 }
 
@@ -140,12 +133,6 @@ namespace word_frequency
                     Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
                 }
             }
-            Console.WriteLine();
-
-            //Test Porter Stemmer
-            //PorterStemmer porterStemmer = new PorterStemmer();
-            //string stem = porterStemmer.StemWord("jumping");
-            //Console.WriteLine(stem);
 
             Console.ReadKey();
         }
