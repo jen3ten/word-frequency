@@ -15,6 +15,7 @@ namespace word_frequency.Tests
         {
             testString = " One ";
             sut = new DataCleaner();
+            sut.TermFrequency = new Dictionary<string, int>();
         }
 
         [Fact]
@@ -79,5 +80,37 @@ namespace word_frequency.Tests
 
             Assert.False(sut.ExistsInTermFrequency(testString));
         }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_False_If_Term_Does_Not_Exist_In_Dictionary()
+        {
+            sut.TermFrequency.Add("hello", 1);
+            string testString = "welcome";
+
+            Assert.False(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Exists_In_Dictionary_Of_One_Element()
+        {
+            sut.TermFrequency.Add("hello", 1);
+            string testString = "hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Exists_In_Dictionary()
+        {
+            sut.TermFrequency.Add("welcome", 10);
+            sut.TermFrequency.Add("hello", 1);
+            sut.TermFrequency.Add("name", 4);
+            sut.TermFrequency.Add("Bob", 2);
+            string testString = "hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+
     }
 }
