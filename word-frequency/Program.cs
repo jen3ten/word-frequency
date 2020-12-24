@@ -129,7 +129,7 @@ namespace word_frequency
                 }
 
                 // print out terms and frequency in descending order
-                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                foreach (var item in cleaner.TermFrequency.OrderByDescending(key => key.Value).Take(20))
                 {
                     Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
                 }
