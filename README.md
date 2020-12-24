@@ -41,6 +41,10 @@ With this process, all non-alphabetic text, except for apostrophes, have been re
 
 An apostrophe typically represents a possessive ("Alice's" or "girl's") or contraction ("he'll" is a contraction of "he will") and exist within a word.  Apostrophes cannot be used as a split delimiter because it will create non-sense words.  Many contractions exist in the stop word list, and will be removed with the stop words.  Any remaining apostrophes will be removed later.   
 
+- ### Remove Apostrophes
+
+Single apostrophes, leading and trailing apostrophes, possessives, and some contractions were removed based on the use and position of the apostrophe within the word.
+
 - ### Add Words and Frequency to Dictionary 
 
 Iterate through the array of words and add the words to a dictionary.  The string word is the 'key' and the integer count of the word's frequency is the 'value'.  This process creates a collection of non-duplicated words and their frequency.  
@@ -51,9 +55,6 @@ By converting the large array of words into a dictionary first, the array of wor
 
 Stop word removal was performed before stemming, so that words like 'was' don't turn into 'wa' by the Porter stemmer. 
 
-- ### Remove Apostrophes
-
-Single apostrophes, possessives, and contractions were removed based on the use and position of the apostrophe within the word.
-
 - ### Stemming
 
+The Porter Stemming algorithm was then used to convert words to their stem.  If the word changed, the dictionary was checked for the stem's existence.  If the stem already existed, it was combined with its match.  If it didn't exist, it was removed from the dictionary, and re-added as a new term.
