@@ -8,7 +8,13 @@ See [NLP, AI, and Machine Learning: What's the Difference?](https://monkeylearn.
 
 ## Requirements
 
-The application reads in a text file, removes stop words, removes all non-alphabetical text, stems words into their root form , computes the frequency of each term, and prints out the 20 most commonly occurring terms in descending order of frequency. 
+The application reads in a text file, removes stop words, removes all non-alphabetical text, stems words into their root form , computes the frequency of each term, and prints out the 20 most commonly occurring terms in descending order of frequency.
+
+### Data Files
+
+This application normalizes text and prints frequency of terms for:
+[Text1- Declaration of Independence](~/word-frequency/Data/Text1.txt)
+[Text2- Alice in Wonderland](~/word-frequency/Data/Text2.txt)
 
 ### Stop Words
 
