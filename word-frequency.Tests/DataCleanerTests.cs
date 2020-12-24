@@ -7,8 +7,8 @@ namespace word_frequency.Tests
 {
     public class DataCleanerTests
     {
-        private string testString;
-        private string expectedString;
+        public string testString;
+        public string expectedString;
         private DataCleaner sut;
 
         public DataCleanerTests()
@@ -44,16 +44,6 @@ namespace word_frequency.Tests
             string[] expectedArray = { "One", "two", "Three", "four", "five", "six", "seven" };
 
             Assert.Equal(expectedArray, sut.SplitStringAtDelimiters(testString));
-        }
-
-        [Fact]
-        public void TrimCharactersFromString_Should_Remove_Question_Mark_From_Lead_and_Trail_Of_String()
-        {
-            string testString = "hello?";
-            char[] testCharacters = { '?'};
-            expectedString = "hello";
-
-            Assert.Equal(expectedString, sut.TrimCharactersFromString(testString, testCharacters));
         }
 
         [Fact]
