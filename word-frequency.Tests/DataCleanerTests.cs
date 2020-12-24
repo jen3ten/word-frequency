@@ -18,22 +18,6 @@ namespace word_frequency.Tests
             sut.TermFrequency = new Dictionary<string, int>();
         }
 
-        //[Fact]
-        //public void TrimString_Should_Remove_Leading_And_Trailing_Spaces()
-        //{
-        //    expectedString = "One";
-
-        //    Assert.Equal(expectedString, sut.TrimString(testString));
-        //}
-
-        //[Fact]
-        //public void StringToLowerCase_Should_Remove_All_Upper_Case_Letters()
-        //{
-        //    expectedString = " one ";
-
-        //    Assert.Equal(expectedString, sut.StringToLowerCase(testString));
-        //}
-
         [Fact]
         public void SplitStringAtDelimiters_Should_Return_String_Array()
         {
@@ -124,9 +108,48 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void AddTermToTermFrequency_Should_Add_New_Key()
+        public void AddStemWordToTermFrequency_Should_Add_New_Key()
         {
             sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            string testString = "welcome";
+            int frequency = 2;
+
+            sut.AddStemWordToTermFrequency(testString, frequency);
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void AddStemWordToTermFrequency_Should_Add_New_Key_In_Lower_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testString = "Welcome";
+            string testStringLowerCase = "welcome";
+            int frequency = 2;
+
+            sut.AddStemWordToTermFrequency(testString, frequency);
+
+            Assert.True(sut.ExistsInTermFrequency(testStringLowerCase));
+        }
+
+        [Fact]
+        public void AddStemWordToTermFrequency_Should_Add_Frequency_As_Value()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            string testString = "welcome";
+            int inputFrequency = 2;
+            int outputFrequency;
+
+            sut.AddStemWordToTermFrequency(testString, inputFrequency);
+            sut.TermFrequency.TryGetValue(testString, out outputFrequency);
+
+            Assert.Equal(2, outputFrequency);
+        }
+
+        [Fact]
+        public void AddTermToTermFrequency_Should_Add_New_Key()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
             string testString = "welcome";
 
             sut.AddTermToTermFrequency(testString);
@@ -149,7 +172,7 @@ namespace word_frequency.Tests
         [Fact]
         public void AddTermToTermFrequency_Should_Have_Frequency_Of_1()
         {
-            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
             string testString = "welcome";
             int frequency;
 
@@ -158,6 +181,7 @@ namespace word_frequency.Tests
 
             Assert.Equal(1, frequency);
         }
+
 
         [Fact]
         public void IncreaseTermFrequency_Should_Add_1_To_Frequency()
@@ -197,14 +221,14 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void RemoveDuplicateTerm_Should_Remove_Term_From_Dictionary()
+        public void RemoveTerm_Should_Remove_Term_From_Dictionary()
         {
             sut.TermFrequency = new Dictionary<string, int>() {
                 {"greet", 1},
                 {"greeting", 3}};
             string duplicateTerm = "greeting";
 
-            sut.RemoveDuplicateTerm(duplicateTerm);
+            sut.RemoveTerm(duplicateTerm);
 
             Assert.False(sut.ExistsInTermFrequency(duplicateTerm)); ;
         }
@@ -234,6 +258,5 @@ namespace word_frequency.Tests
 
             Assert.False(sut.ExistsInTermFrequency(stopWord.ToLower())); ;
         }
-
     }
 }

@@ -15,16 +15,6 @@ namespace word_frequency
             TermFrequency = new Dictionary<string, int>();
         }
 
-        //public string TrimString(string dataString)
-        //{
-        //    return dataString.Trim();
-        //}
-
-        //public string StringToLowerCase(string dataString)
-        //{
-        //    return dataString.ToLower();
-        //}
-
         public string TrimCharactersFromString(string dataString, char[] trimmedCharacters)
         {
             return dataString.Trim(trimmedCharacters);
@@ -48,12 +38,6 @@ namespace word_frequency
             sr.Read(Delimiters);
         }
 
-        //public static string[] SplitStringAtDelimiters(string dataString, char[] delimiters)
-        //{
-        //    string[] dataArray = dataString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
-        //    return dataArray;
-        //}
-
         public string[] SplitStringAtDelimiters(string dataString)
         {
             string[] dataArray = dataString.Split(Delimiters, StringSplitOptions.RemoveEmptyEntries);
@@ -71,7 +55,15 @@ namespace word_frequency
 
         public void AddTermToTermFrequency(string term)
         {
-            TermFrequency.Add(term.ToLower(), 1);
+            if(!String.IsNullOrEmpty(term))
+            {
+                TermFrequency.Add(term.ToLower(), 1);
+            }
+        }
+
+        public void AddStemWordToTermFrequency(string term, int frequency)
+        {
+            TermFrequency.Add(term.ToLower(), frequency);
         }
 
         public void IncreaseTermFrequency(string term, int increaseFrequency)
@@ -79,7 +71,7 @@ namespace word_frequency
             TermFrequency[term.ToLower()] += increaseFrequency;
         }
 
-        public void RemoveDuplicateTerm(string term)
+        public void RemoveTerm(string term)
         {
             TermFrequency.Remove(term);
         }
@@ -87,6 +79,27 @@ namespace word_frequency
         public void RemoveStopWord(string stopWord)
         {
             TermFrequency.Remove(stopWord.ToLower());
+        }
+
+        public string RemoveApostropheSubstringFromWord(string word)
+        {
+            int index = word.IndexOf('\'');
+
+            if (index == 0) // remove leading apostrophe, such as 'tis
+            {
+                word = word.Remove(0, 1);
+            }
+            else if(index == word.Length - 1) // remove trailing apostrophe
+            {
+                word = word.Remove(index, 1);
+            }
+            else if (word.ToLower().EndsWith("\'s") || word.ToLower().EndsWith("\'ll")) // remove 's or 'll substring 
+            {
+                int subStringLength = word.Length - index;
+                word = word.Remove(index, subStringLength);
+            }
+
+            return word;
         }
     }
 }

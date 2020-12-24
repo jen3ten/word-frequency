@@ -39,7 +39,11 @@ The text file was split into an array of words using non-alphabetic text as the 
 
 With this process, all non-alphabetic text, except for apostrophes, have been removed.  Non-alphabetic text includes any characters not found in the a-z or A-Z character sets, such as numbers (0-9), punctuation, and special characters.  
 
-An apostrophe typically represents a possessive ("Alice's" or "girl's") or contraction ("he'll" is a contraction of "he will").  Many contractions exist in the stop word list, and will be removed with the stop words.  Other contractions are less frequent and will remain.   
+An apostrophe typically represents a possessive ("Alice's" or "girl's") or contraction ("he'll" is a contraction of "he will") and exist within a word.  Apostrophes cannot be used as a split delimiter because it will create non-sense words.  Many contractions exist in the stop word list, and will be removed with the stop words.  Any remaining apostrophes will be removed later.   
+
+- ### Remove Apostrophes
+
+Single apostrophes, leading and trailing apostrophes, possessives, and some contractions were removed based on the use and position of the apostrophe within the word.
 
 - ### Add Words and Frequency to Dictionary 
 
@@ -47,9 +51,10 @@ Iterate through the array of words and add the words to a dictionary.  The strin
 
 By converting the large array of words into a dictionary first, the array of words is only iterated once.  Future manipulations of the collection, for removal of stop words or stemming, will occur more quickly by looking up words in the efficient and smaller dictionary.
 
-- ### Stop Word Removal
+- ### Remove Stop Words
 
 Stop word removal was performed before stemming, so that words like 'was' don't turn into 'wa' by the Porter stemmer. 
 
 - ### Stemming
 
+The Porter Stemming algorithm was then used to convert words to their stem.  If the word changed, the dictionary was checked for the stem's existence.  If the stem already existed, it was combined with its match.  If it didn't exist, it was removed from the dictionary, and re-added as a new term.

@@ -22,29 +22,21 @@ namespace word_frequency
 
             DataReader reader = new DataReader(filePath);
             DataCleaner cleaner = new DataCleaner();
+            PorterStemmer porterStemmer = new PorterStemmer();
 
+            // create a string list of stop words
             if (reader.DefineStream(stopWordsDataFile))
             {
                 stopWords = reader.ConvertTextFileToList(reader.Stream);
-
-                //for (int i = 0; i < stopWords.Count; i++)
-                //{
-                //    Console.WriteLine(stopWords[i]);
-                //}
             }
-            Console.WriteLine();
 
+            // create a char array of delimiters
             if (reader.DefineStream(delimitersDataFile))
             {
                 cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
-
-                //for (int i = 0; i < cleaner.Delimiters.Length; i++)
-                //{
-                //    Console.WriteLine(cleaner.Delimiters[i]);
-                //}
             }
-            Console.WriteLine();
 
+            // 
             if (reader.DefineStream(text1DataFile))
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
@@ -76,26 +68,32 @@ namespace word_frequency
 
             if (reader.DefineStream(text2DataFile))
             {
+                // create array of words from text file
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
                 string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
-                //for (int i = 0; i < text2Words.Length; i++)
-                //{
-                //    Console.WriteLine(text2Words[i]);
-                //}
 
-                foreach (string term in text2Words)
+                // add words to TermFrequency dictionary by name and frequency
+                for (int i = 0; i < text2Words.Length; i++)
                 {
-                    if (cleaner.ExistsInTermFrequency(term))
+                    // first, remove apostrophes from words
+                    if (text2Words[i].Contains('\''))
                     {
-                        cleaner.IncreaseTermFrequency(term, 1);
+                        text2Words[i] = cleaner.RemoveApostropheSubstringFromWord(text2Words[i]);
+                    }
+
+                    // then, add as a new entry or increase frequency of existing entry
+                    if (cleaner.ExistsInTermFrequency(text2Words[i]))
+                    {
+                        cleaner.IncreaseTermFrequency(text2Words[i], 1);
                     }
                     else
                     {
-                        cleaner.AddTermToTermFrequency(term);
+                        cleaner.AddTermToTermFrequency(text2Words[i]);
                     }
                 }
 
-                foreach(string word in stopWords)
+                // remove stop words from TermFrequency dictionary
+                foreach (string word in stopWords)
                 {
                     if (cleaner.ExistsInTermFrequency(word))
                     {
@@ -103,12 +101,39 @@ namespace word_frequency
                     }
                 }
 
-                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
+                string originalTerm;
+                int frequency;
+                Dictionary<string, int> TermFrequencyCopy = new Dictionary<string, int>(cleaner.TermFrequency);
+                foreach (var item in TermFrequencyCopy)
+                {
+                    originalTerm = item.Key;
+                    frequency = item.Value;
+                    string stem = porterStemmer.StemWord(originalTerm);
+                    if (!stem.Equals(originalTerm))
+                    {
+                        // if the stem already exists in the dictionary, combine its frequency with existing frequency
+                        if (cleaner.ExistsInTermFrequency(stem)) 
+                        {
+                            cleaner.IncreaseTermFrequency(stem, frequency); 
+                        }
+                        else
+                        {
+                            // else, add new stem word and frequency to dictionary
+                            cleaner.AddStemWordToTermFrequency(stem, frequency); 
+                        }
+
+                        // remove the original term from the dictionary
+                        cleaner.RemoveTerm(originalTerm); 
+                    }
+                }
+
+                // print out terms and frequency in descending order
+                foreach (var item in cleaner.TermFrequency.OrderByDescending(key => key.Value).Take(20))
                 {
                     Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
                 }
             }
-            Console.WriteLine();
 
             Console.ReadKey();
         }
