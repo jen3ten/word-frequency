@@ -114,7 +114,7 @@ namespace word_frequency.Tests
         [Fact]
         public void AddTermToTermFrequency_Should_Add_New_Key()
         {
-            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
             string testString = "welcome";
 
             sut.AddTermToTermFrequency(testString);
@@ -125,7 +125,7 @@ namespace word_frequency.Tests
         [Fact]
         public void AddTermToTermFrequency_Should_Have_Frequency_Of_1()
         {
-            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
             string testString = "welcome";
             int frequency;
 
@@ -138,12 +138,27 @@ namespace word_frequency.Tests
         [Fact]
         public void IncreaseTermFrequency_Should_Add_1_To_Frequency()
         {
-            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
             string testTerm = "hello";
 
             sut.IncreaseTermFrequency(testTerm, 1);
 
             Assert.Equal(2, sut.TermFrequency[testTerm]);
         }
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_Value_Of_Duplicate_Term_To_Frequency()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() {
+                {"greet", 1},
+                {"greeting", 3}};
+            string term = "greet";
+            int frequencyOfDuplicate = sut.TermFrequency["greeting"];
+
+            sut.IncreaseTermFrequency(term, frequencyOfDuplicate);
+
+            Assert.Equal(4, sut.TermFrequency[term]);
+        }
+
     }
 }
