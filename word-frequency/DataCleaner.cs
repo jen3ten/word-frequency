@@ -64,7 +64,7 @@ namespace word_frequency
         {
             if(TermFrequency != null  && TermFrequency.Count > 0)
             {
-                return TermFrequency.ContainsKey(term);
+                return TermFrequency.ContainsKey(term.ToLower());
             }
             return false;
         }

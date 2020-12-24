@@ -100,6 +100,18 @@ namespace word_frequency.Tests
         }
 
         [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Found_Regardless_Of_Case()
+        {
+            sut.TermFrequency.Add("welcome", 10);
+            sut.TermFrequency.Add("hello", 1);
+            sut.TermFrequency.Add("name", 4);
+            sut.TermFrequency.Add("Bob", 2);
+            string testString = "Hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
         public void ExistsInTermFrequency_Should_Return_True_If_Term_Exists_In_Dictionary()
         {
             sut.TermFrequency.Add("welcome", 10);
