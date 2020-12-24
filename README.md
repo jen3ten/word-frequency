@@ -13,8 +13,8 @@ The application reads in a text file, removes stop words, removes all non-alphab
 ### Data Files
 
 This application normalizes text and prints frequency of terms for:
-[Text1- Declaration of Independence](~/word-frequency/Data/Text1.txt)
-[Text2- Alice in Wonderland](~/word-frequency/Data/Text2.txt)
+- [Text1- Declaration of Independence](./word-frequency/Data/Text1.txt)
+- [Text2- Alice in Wonderland](./word-frequency/Data/Text2.txt)
 
 ### Stop Words
 
@@ -72,5 +72,5 @@ To run the application, please clone this project to your machine.  Open it in V
 ## Results
 
 The result of running the normalization process and determing the frequency of each term can be found in the following files:
-[Text1- Declaration of Independence Terms & Frequency](~/word-frequency/Data/Text1frequency.txt)
-[Text2- Alice in Wonderland Terms & Frequency](~/word-frequency/Data/Text2frequency.txt)
+- [Text1- Declaration of Independence Terms & Frequency](./word-frequency/Data/Text1frequency.txt)
+- [Text2- Alice in Wonderland Terms & Frequency](./word-frequency/Data/Text2frequency.txt)
