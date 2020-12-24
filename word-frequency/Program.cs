@@ -104,7 +104,8 @@ namespace word_frequency
                 // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
                 string originalTerm;
                 int frequency;
-                foreach (var item in cleaner.TermFrequency)
+                Dictionary<string, int> TermFrequencyCopy = new Dictionary<string, int>(cleaner.TermFrequency);
+                foreach (var item in TermFrequencyCopy)
                 {
                     originalTerm = item.Key;
                     frequency = item.Value;
@@ -123,8 +124,7 @@ namespace word_frequency
                         }
 
                         // remove the original term from the dictionary
-                        // problem with removal from dictionary
-                        // cleaner.RemoveTerm(originalTerm); 
+                        cleaner.RemoveTerm(originalTerm); 
                     }
                 }
 
