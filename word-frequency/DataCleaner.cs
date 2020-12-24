@@ -66,7 +66,7 @@ namespace word_frequency
 
         public void AddKeyToTermFrequency(string term)
         {
-
+            TermFrequency.Add(term, 1);
         }
     }
 }
