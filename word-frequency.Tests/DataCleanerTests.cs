@@ -146,7 +146,6 @@ namespace word_frequency.Tests
             Assert.True(sut.ExistsInTermFrequency(testStringLowerCase));
         }
 
-
         [Fact]
         public void AddTermToTermFrequency_Should_Have_Frequency_Of_1()
         {
@@ -170,6 +169,18 @@ namespace word_frequency.Tests
 
             Assert.Equal(2, sut.TermFrequency[testTerm]);
         }
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_1_To_Frequency_Regardless_Of_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testTerm = "Hello";
+
+            sut.IncreaseTermFrequency(testTerm, 1);
+
+            Assert.Equal(2, sut.TermFrequency["hello"]);
+        }
+
 
         [Fact]
         public void IncreaseTermFrequency_Should_Add_Value_Of_Duplicate_Term_To_Frequency()

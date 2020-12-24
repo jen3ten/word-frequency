@@ -76,7 +76,7 @@ namespace word_frequency
 
         public void IncreaseTermFrequency(string term, int increaseFrequency)
         {
-            TermFrequency[term] += increaseFrequency;
+            TermFrequency[term.ToLower()] += increaseFrequency;
         }
 
         public void RemoveDuplicateTerm(string term)
