@@ -87,7 +87,7 @@ namespace word_frequency
             TermFrequency[term.ToLower()] += increaseFrequency;
         }
 
-        public void RemoveDuplicateTerm(string term)
+        public void RemoveTerm(string term)
         {
             TermFrequency.Remove(term);
         }

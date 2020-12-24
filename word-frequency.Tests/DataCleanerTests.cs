@@ -237,14 +237,14 @@ namespace word_frequency.Tests
         }
 
         [Fact]
-        public void RemoveDuplicateTerm_Should_Remove_Term_From_Dictionary()
+        public void RemoveTerm_Should_Remove_Term_From_Dictionary()
         {
             sut.TermFrequency = new Dictionary<string, int>() {
                 {"greet", 1},
                 {"greeting", 3}};
             string duplicateTerm = "greeting";
 
-            sut.RemoveDuplicateTerm(duplicateTerm);
+            sut.RemoveTerm(duplicateTerm);
 
             Assert.False(sut.ExistsInTermFrequency(duplicateTerm)); ;
         }

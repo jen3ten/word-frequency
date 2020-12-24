@@ -90,10 +90,7 @@ namespace word_frequency
                     // first, remove apostrophes from words
                     if (text2Words[i].Contains('\''))
                     {
-                        Console.Write(text2Words[i] + ", ");
                         text2Words[i] = cleaner.RemoveApostropheSubstringFromWord(text2Words[i]);
-                        Console.WriteLine(text2Words[i]);
-
                     }
 
                     if (cleaner.ExistsInTermFrequency(text2Words[i]))
@@ -116,16 +113,24 @@ namespace word_frequency
                 }
 
                 // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
-                string term;
+                string originalTerm;
                 int frequency;
                 foreach (KeyValuePair<string, int> item in cleaner.TermFrequency)
                 {
-                    term = item.Key;
+                    originalTerm = item.Key;
                     frequency = item.Value;
-                    string stem = porterStemmer.StemWord(term);
-                    if (!stem.Equals(term))
+                    string stem = porterStemmer.StemWord(originalTerm);
+                    if (!stem.Equals(originalTerm))
                     {
-                        //Console.WriteLine($"{stem} derived from {term}");
+                        if (cleaner.ExistsInTermFrequency(stem)) // if the stem word already exists in the dictionary
+                        {
+                            cleaner.IncreaseTermFrequency(stem, frequency);  // combine its frequency with existing frequency
+                        }
+                        else
+                        {
+                            cleaner.AddStemWordToTermFrequency(stem, frequency); // add new stem word and frequency to dictionary
+                        }
+                        cleaner.RemoveTerm(originalTerm); // remove the original term from the dictionary
                     }
                 }
 
