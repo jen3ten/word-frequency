@@ -22,6 +22,7 @@ namespace word_frequency
 
             DataReader reader = new DataReader(filePath);
             DataCleaner cleaner = new DataCleaner();
+            PorterStemmer porterStemmer = new PorterStemmer();
 
             if (reader.DefineStream(stopWordsDataFile))
             {
@@ -83,26 +84,43 @@ namespace word_frequency
                 //    Console.WriteLine(text2Words[i]);
                 //}
 
-                //foreach (string term in text2Words)
-                //{
-                //    if (cleaner.ExistsInTermFrequency(term))
-                //    {
-                //        cleaner.IncreaseTermFrequency(term, 1);
-                //    }
-                //    else
-                //    {
-                //        cleaner.AddTermToTermFrequency(term);
-                //    }
-                //}
+                // add words to TermFrequency dictionary with term frequency
+                foreach (string word in text2Words)
+                {
+                    if (cleaner.ExistsInTermFrequency(word))
+                    {
+                        cleaner.IncreaseTermFrequency(word, 1);
+                    }
+                    else
+                    {
+                        cleaner.AddTermToTermFrequency(word);
+                    }
+                }
 
-                //foreach(string word in stopWords)
-                //{
-                //    if (cleaner.ExistsInTermFrequency(word))
-                //    {
-                //        cleaner.RemoveStopWord(word);
-                //    }
-                //}
+                // remove stop words from TermFrequency dictionary
+                foreach (string word in stopWords)
+                {
+                    if (cleaner.ExistsInTermFrequency(word))
+                    {
+                        cleaner.RemoveStopWord(word);
+                    }
+                }
 
+                // stem words in TermFrequency dictionary and add new stems to dictionary, or combine with existing stem
+                string term;
+                int frequency;
+                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency)
+                {
+                    term = item.Key;
+                    frequency = item.Value;
+                    string stem = porterStemmer.StemWord(term);
+                    if (!stem.Equals(term))
+                    {
+                        Console.WriteLine($"{stem} derived from {term}");
+                    }
+                }
+
+                // print out terms and frequency in descending order
                 //foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
                 //{
                 //    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
@@ -111,9 +129,9 @@ namespace word_frequency
             Console.WriteLine();
 
             //Test Porter Stemmer
-            PorterStemmer porterStemmer = new PorterStemmer();
-            string stem = porterStemmer.StemWord("jumping");
-            Console.WriteLine(stem);
+            //PorterStemmer porterStemmer = new PorterStemmer();
+            //string stem = porterStemmer.StemWord("jumping");
+            //Console.WriteLine(stem);
 
             Console.ReadKey();
         }
