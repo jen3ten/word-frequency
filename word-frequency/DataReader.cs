@@ -24,6 +24,7 @@ namespace word_frequency
             }
             catch (Exception e)
             {
+                Console.WriteLine($"ERROR connecting to {fileName}:");
                 Console.WriteLine(e.Message);
                 return false;
             }
