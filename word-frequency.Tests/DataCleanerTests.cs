@@ -15,6 +15,7 @@ namespace word_frequency.Tests
         {
             testString = " One ";
             sut = new DataCleaner();
+            sut.TermFrequency = new Dictionary<string, int>();
         }
 
         [Fact]
@@ -70,5 +71,144 @@ namespace word_frequency.Tests
 
             Assert.Equal(expectedString, sut.TrimCharactersFromString(testString, testCharacters));
         }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_False_If_Dictionary_Is_Empty()
+        {
+            sut.TermFrequency = null;
+            string testString = "hello";
+
+            Assert.False(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_False_If_Term_Does_Not_Exist_In_Dictionary()
+        {
+            sut.TermFrequency.Add("hello", 1);
+            string testString = "welcome";
+
+            Assert.False(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Exists_In_Dictionary_Of_One_Element()
+        {
+            sut.TermFrequency.Add("hello", 1);
+            string testString = "hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Found_Regardless_Of_Case()
+        {
+            sut.TermFrequency.Add("welcome", 10);
+            sut.TermFrequency.Add("hello", 1);
+            sut.TermFrequency.Add("name", 4);
+            sut.TermFrequency.Add("Bob", 2);
+            string testString = "Hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void ExistsInTermFrequency_Should_Return_True_If_Term_Exists_In_Dictionary()
+        {
+            sut.TermFrequency.Add("welcome", 10);
+            sut.TermFrequency.Add("hello", 1);
+            sut.TermFrequency.Add("name", 4);
+            sut.TermFrequency.Add("Bob", 2);
+            string testString = "hello";
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void AddTermToTermFrequency_Should_Add_New_Key()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            string testString = "welcome";
+
+            sut.AddTermToTermFrequency(testString);
+
+            Assert.True(sut.ExistsInTermFrequency(testString));
+        }
+
+        [Fact]
+        public void AddTermToTermFrequency_Should_Add_New_Key_In_Lower_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testString = "Welcome";
+            string testStringLowerCase = "welcome";
+
+            sut.AddTermToTermFrequency(testString);
+
+            Assert.True(sut.ExistsInTermFrequency(testStringLowerCase));
+        }
+
+        [Fact]
+        public void AddTermToTermFrequency_Should_Have_Frequency_Of_1()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            string testString = "welcome";
+            int frequency;
+
+            sut.AddTermToTermFrequency(testString);
+            sut.TermFrequency.TryGetValue(testString, out frequency);
+
+            Assert.Equal(1, frequency);
+        }
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_1_To_Frequency()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };
+            string testTerm = "hello";
+
+            sut.IncreaseTermFrequency(testTerm, 1);
+
+            Assert.Equal(2, sut.TermFrequency[testTerm]);
+        }
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_1_To_Frequency_Regardless_Of_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testTerm = "Hello";
+
+            sut.IncreaseTermFrequency(testTerm, 1);
+
+            Assert.Equal(2, sut.TermFrequency["hello"]);
+        }
+
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_Value_Of_Duplicate_Term_To_Frequency()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() {
+                {"greet", 1},
+                {"greeting", 3}};
+            string term = "greet";
+            int frequencyOfDuplicate = sut.TermFrequency["greeting"];
+
+            sut.IncreaseTermFrequency(term, frequencyOfDuplicate);
+
+            Assert.Equal(4, sut.TermFrequency[term]);
+        }
+
+        [Fact]
+        public void RemoveDuplicateTerm_Should_Remove_Term_From_Dictionary()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() {
+                {"greet", 1},
+                {"greeting", 3}};
+            string duplicateTerm = "greeting";
+
+            sut.RemoveDuplicateTerm(duplicateTerm);
+
+            Assert.False(sut.ExistsInTermFrequency(duplicateTerm)); ;
+
+        }
+
     }
 }

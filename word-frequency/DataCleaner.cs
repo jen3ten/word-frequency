@@ -8,6 +8,12 @@ namespace word_frequency
     public class DataCleaner
     {
         public char[] Delimiters { get; set; }
+        public Dictionary<string, int> TermFrequency {get; set;}
+
+        public DataCleaner()
+        {
+            TermFrequency = new Dictionary<string, int>();
+        }
 
         public string TrimString(string dataString)
         {
@@ -54,6 +60,28 @@ namespace word_frequency
             return dataArray;
         }
 
+        public bool ExistsInTermFrequency(string term)
+        {
+            if(TermFrequency != null  && TermFrequency.Count > 0)
+            {
+                return TermFrequency.ContainsKey(term.ToLower());
+            }
+            return false;
+        }
 
+        public void AddTermToTermFrequency(string term)
+        {
+            TermFrequency.Add(term.ToLower(), 1);
+        }
+
+        public void IncreaseTermFrequency(string term, int increaseFrequency)
+        {
+            TermFrequency[term.ToLower()] += increaseFrequency;
+        }
+
+        public void RemoveDuplicateTerm(string term)
+        {
+            TermFrequency.Remove(term);
+        }
     }
 }

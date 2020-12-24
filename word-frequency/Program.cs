@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace word_frequency
 {
@@ -39,10 +40,10 @@ namespace word_frequency
             {
                 cleaner.CreateDelimiterArrayFromTextFile(reader.Stream);
 
-                for (int i = 0; i < cleaner.Delimiters.Length; i++)
-                {
-                    Console.WriteLine(cleaner.Delimiters[i]);
-                }
+                //for (int i = 0; i < cleaner.Delimiters.Length; i++)
+                //{
+                //    Console.WriteLine(cleaner.Delimiters[i]);
+                //}
             }
             Console.WriteLine();
 
@@ -50,10 +51,28 @@ namespace word_frequency
             {
                 text1Data = reader.ConvertTextFileToString(reader.Stream);
                 string[] text1Words = cleaner.SplitStringAtDelimiters(text1Data);
-                for (int i = 0; i < text1Words.Length; i++)
-                {
-                    Console.WriteLine(text1Words[i]);
-                }
+                //for (int i = 0; i < text1Words.Length; i++)
+                //{
+                //    Console.WriteLine(text1Words[i]);
+                //}
+
+                //foreach(string term in text1Words)
+                //{
+                //    if (cleaner.ExistsInTermFrequency(term))
+                //    {
+                //        cleaner.IncreaseTermFrequency(term, 1);
+                //    }
+                //    else
+                //    {
+                //        cleaner.AddTermToTermFrequency(term);
+                //    }
+                //}
+
+                //foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                //{
+                //    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
+                //}
+
             }
             Console.WriteLine();
 
@@ -61,9 +80,26 @@ namespace word_frequency
             {
                 text2Data = reader.ConvertTextFileToString(reader.Stream);
                 string[] text2Words = cleaner.SplitStringAtDelimiters(text2Data);
-                for (int i = 0; i < text2Words.Length; i++)
+                //for (int i = 0; i < text2Words.Length; i++)
+                //{
+                //    Console.WriteLine(text2Words[i]);
+                //}
+
+                foreach (string term in text2Words)
                 {
-                    Console.WriteLine(text2Words[i]);
+                    if (cleaner.ExistsInTermFrequency(term))
+                    {
+                        cleaner.IncreaseTermFrequency(term, 1);
+                    }
+                    else
+                    {
+                        cleaner.AddTermToTermFrequency(term);
+                    }
+                }
+
+                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                {
+                    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
                 }
             }
             Console.WriteLine();
