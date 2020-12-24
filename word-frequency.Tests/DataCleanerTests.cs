@@ -207,7 +207,32 @@ namespace word_frequency.Tests
             sut.RemoveDuplicateTerm(duplicateTerm);
 
             Assert.False(sut.ExistsInTermFrequency(duplicateTerm)); ;
+        }
 
+        [Fact]
+        public void RemoveStopWord_Should_Remove_Stop_Word_From_Dictionary()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() {
+                {"greet", 1},
+                {"and", 12}};
+            string stopWord = "and";
+
+            sut.RemoveStopWord(stopWord);
+
+            Assert.False(sut.ExistsInTermFrequency(stopWord)); ;
+        }
+
+        [Fact]
+        public void RemoveStopWord_Should_Remove_Stop_Word_From_Dictionary_Regardless_Of_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() {
+                {"greet", 1},
+                {"and", 12}};
+            string stopWord = "And";
+
+            sut.RemoveStopWord(stopWord);
+
+            Assert.False(sut.ExistsInTermFrequency(stopWord.ToLower())); ;
         }
 
     }

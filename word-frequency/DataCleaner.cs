@@ -83,5 +83,10 @@ namespace word_frequency
         {
             TermFrequency.Remove(term);
         }
+
+        public void RemoveStopWord(string stopWord)
+        {
+            TermFrequency.Remove(stopWord.ToLower());
+        }
     }
 }
