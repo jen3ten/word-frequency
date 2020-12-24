@@ -135,6 +135,19 @@ namespace word_frequency.Tests
         }
 
         [Fact]
+        public void AddTermToTermFrequency_Should_Add_New_Key_In_Lower_Case()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testString = "Welcome";
+            string testStringLowerCase = "welcome";
+
+            sut.AddTermToTermFrequency(testString);
+
+            Assert.True(sut.ExistsInTermFrequency(testStringLowerCase));
+        }
+
+
+        [Fact]
         public void AddTermToTermFrequency_Should_Have_Frequency_Of_1()
         {
             sut.TermFrequency = new Dictionary<string, int>() { {"hello", 1} };

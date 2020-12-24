@@ -71,7 +71,7 @@ namespace word_frequency
 
         public void AddTermToTermFrequency(string term)
         {
-            TermFrequency.Add(term, 1);
+            TermFrequency.Add(term.ToLower(), 1);
         }
 
         public void IncreaseTermFrequency(string term, int increaseFrequency)
