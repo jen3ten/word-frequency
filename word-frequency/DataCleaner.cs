@@ -64,9 +64,14 @@ namespace word_frequency
             return false;
         }
 
-        public void AddKeyToTermFrequency(string term)
+        public void AddTermToTermFrequency(string term)
         {
             TermFrequency.Add(term, 1);
+        }
+
+        public void IncreaseTermFrequency(string term, int increase)
+        {
+
         }
     }
 }

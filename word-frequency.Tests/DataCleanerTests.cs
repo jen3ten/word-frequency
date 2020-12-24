@@ -134,5 +134,16 @@ namespace word_frequency.Tests
 
             Assert.Equal(1, frequency);
         }
+
+        [Fact]
+        public void IncreaseTermFrequency_Should_Add_1_To_Frequency()
+        {
+            sut.TermFrequency = new Dictionary<string, int>() { { "hello", 1 } };
+            string testTerm = "hello";
+
+            sut.IncreaseTermFrequency(testTerm, 1);
+
+            Assert.Equal(2, sut.TermFrequency[testTerm]);
+        }
     }
 }
