@@ -10,6 +10,11 @@ namespace word_frequency
         public char[] Delimiters { get; set; }
         public Dictionary<string, int> TermFrequency {get; set;}
 
+        public DataCleaner()
+        {
+            TermFrequency = new Dictionary<string, int>();
+        }
+
         public string TrimString(string dataString)
         {
             return dataString.Trim();
@@ -57,7 +62,7 @@ namespace word_frequency
 
         public bool ExistsInTermFrequency(string term)
         {
-            if(TermFrequency != null)
+            if(TermFrequency != null  && TermFrequency.Count > 0)
             {
                 return TermFrequency.ContainsKey(term);
             }
