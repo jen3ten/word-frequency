@@ -378,4 +378,3 @@ namespace word_frequency
 		}
 	}
 }
-}

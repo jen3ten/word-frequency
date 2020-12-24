@@ -83,32 +83,37 @@ namespace word_frequency
                 //    Console.WriteLine(text2Words[i]);
                 //}
 
-                foreach (string term in text2Words)
-                {
-                    if (cleaner.ExistsInTermFrequency(term))
-                    {
-                        cleaner.IncreaseTermFrequency(term, 1);
-                    }
-                    else
-                    {
-                        cleaner.AddTermToTermFrequency(term);
-                    }
-                }
+                //foreach (string term in text2Words)
+                //{
+                //    if (cleaner.ExistsInTermFrequency(term))
+                //    {
+                //        cleaner.IncreaseTermFrequency(term, 1);
+                //    }
+                //    else
+                //    {
+                //        cleaner.AddTermToTermFrequency(term);
+                //    }
+                //}
 
-                foreach(string word in stopWords)
-                {
-                    if (cleaner.ExistsInTermFrequency(word))
-                    {
-                        cleaner.RemoveStopWord(word);
-                    }
-                }
+                //foreach(string word in stopWords)
+                //{
+                //    if (cleaner.ExistsInTermFrequency(word))
+                //    {
+                //        cleaner.RemoveStopWord(word);
+                //    }
+                //}
 
-                foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
-                {
-                    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
-                }
+                //foreach (KeyValuePair<string, int> item in cleaner.TermFrequency.OrderByDescending(key => key.Value))
+                //{
+                //    Console.WriteLine($"Term: {item.Key}, Frequency: {item.Value}");
+                //}
             }
             Console.WriteLine();
+
+            //Test Porter Stemmer
+            PorterStemmer porterStemmer = new PorterStemmer();
+            string stem = porterStemmer.StemWord("jumping");
+            Console.WriteLine(stem);
 
             Console.ReadKey();
         }
